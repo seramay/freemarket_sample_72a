@@ -16,14 +16,9 @@
 |birthday_year|string|null: false|
 |birthday_month|string|null: false|
 |birthday_day|string|null: false|
-|post_code|integer||
-|prefecture_code|integer||
-|address_city|string||
-|address_street|string||
-|address_building|string||
 |profile|text||
 ### association
-- belongs_to :deliver_address
+- has_one :deliver_address
 - has_many :orders
 - has_many :cards
 - has_many :items
