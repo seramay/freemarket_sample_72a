@@ -35,7 +35,6 @@
 |ship_day|string|null: false|
 |ship_price|string|null: false|
 |user_id|references|null: false, foreign_key: true|
-|item_image_id|references|null: false, foreign_key: true|
 |category_id|references|null: false, foreign_key: true|
 |brand_id|references|null: false, foreign_key: true|
 ### association
