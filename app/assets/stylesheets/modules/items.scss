@@ -1,0 +1,40 @@
+// Place all the styles related to the items controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "reset";
+
+.buy-main {
+  background-color: #CCB7B4;
+  .buy-main__box {
+    .box__content {
+      width: 700px;
+      height: 100vh;
+      margin: 0 auto;
+      .content__buy-title {
+        padding: 20px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 23px;
+        background-color: peachpuff;
+      }
+      .content__buy-product {
+        height: 400px;
+        background-color: rosybrown;
+        .buy-product__inner {
+          margin: 0 auto;
+          .inner__item {
+            display: flex;
+            .item__image {
+              height: 110px;
+              width: 100px;
+              background-color: saddlebrown;
+            }
+            .item__name {
+
+            }
+          }
+        }
+      }
+    }
+  }
+}
