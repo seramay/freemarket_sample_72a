@@ -1,17 +1,38 @@
-%h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
+.login__new
+  .login__title
+    = link_to "#" do
+      = image_tag src=("logo.png"), class: "login__image"
+  .login__form
+    .login__container
+      .container__head
+        .head__title
+          %p アカウントをお持ち出ない方はこちら
+        .head__btn
+          = link_to "#" do
+            新規会員登録
+      .container__body
+        %ul.body__lists
+          %li.btn__list__fa
+            = link_to "#" do
+              %i.fab.fa-facebook-square
+              Facebookでログイン
+          %li.btn__list__go
+            = link_to "#" do
+              = image_tag src=("https://i.gyazo.com/1e79bd9….png")
+              Googleでログイン
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          .field
+            = f.label :email
+            %br/
+            = f.email_field :email, autofocus: true, autocomplete: "email"
+          .field
+            = f.label :password
+            %br/
+            = f.password_field :password, autocomplete: "current-password"
+          - if devise_mapping.rememberable?
+            .field
+              = f.check_box :remember_me
+              = f.label :remember_me
+          .actions
+            = f.submit "ログイン"
 = render "users/shared/links"
