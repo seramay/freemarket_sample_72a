@@ -44,6 +44,17 @@ p,
 blockquote,
 th,
 td {
+  margin:0;
+  padding:0;
+}
+table {
+  border-collapse:collapse;
+  border-spacing:0;
+}
+fieldset,
+img {
+  border:0;
+}
     margin:0;
     padding:0;
 }
@@ -108,10 +119,10 @@ sub {
 input,
 textarea,
 select {
-    font-family:inherit;
-    font-size:inherit;
-    font-weight:inherit;
-    *font-size:100%;
+  font-family:inherit;
+  font-size:inherit;
+  font-weight:inherit;
+  *font-size:100%; /*to enable resizing for IE*/
 }
 
 /*because legend doesn't inherit in IE */
