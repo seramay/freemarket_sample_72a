@@ -10,7 +10,7 @@
         %h3 
           出品画像
           %span 必須
-        %p 最大10枚までアップロードできます
+        %p 最大5枚までアップロードできます
         .images-drop
           .images-drop__container
             .container-box
@@ -23,7 +23,7 @@
               .container-box__area
                 %label.images-label
                   .images-input
-                    -# ファイルが挿入されるたびに同じ要素を増やす
+                    -# ファイルが挿入されるたびに同じ要素を増やす,Todo JS
                     %input{type: "file"}
       .new_product__item-content
         .content-formbox
@@ -222,9 +222,9 @@
                 %i.fa.fa-angle-down
                 %select.delivery-ship
                   %option(value) ---
-                  %option(value="1〜2で発送") 1〜2で発送
-                  %option(value="2〜3で発送") 2〜3で発送
-                  %option(value="4〜7で発送") 4〜7で発送
+                  %option(value="1〜2日で発送") 1〜2日で発送
+                  %option(value="2〜3日で発送") 2〜3日で発送
+                  %option(value="4〜7日で発送") 4〜7日で発送
       .new_product__item-content.formFlex
         %h4 販売価格(300〜9,999,999)
         =link_to "？", "#", class: 'help-icon'
