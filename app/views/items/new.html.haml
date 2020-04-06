@@ -1,0 +1,280 @@
+.item-new-body
+  .item-new-body__header
+    .header__logo
+      =link_to image_tag("logo", size: "180x50"), root_path
+  .item-new-body__main
+    %h2 商品の情報の入力
+    %form.new_product
+      -# .alert-warning //エラー時にアラートボックスを表示
+      .new_product__upload-images
+        %h3 
+          出品画像
+          %span 必須
+        %p 最大10枚までアップロードできます
+        .images-drop
+          .images-drop__container
+            .container-box
+              .container-box__preview
+                .preview--zone
+                  .img ※ 画像投稿部
+                  .buttons
+                    .buttons--edit 編集
+                    .buttons--delete 削除
+              .container-box__area
+                %label.images-label
+                  .images-input
+                    -# ファイルが挿入されるたびに同じ要素を増やす
+                    %input{type: "file"}
+      .new_product__item-content
+        .content-formbox
+          %h3
+            商品名
+            %span 必須
+          .item_input
+            %input.item_input--name{placeholder: "商品名(40文字まで)"}
+        .content-formbox
+          %h3
+            商品の説明
+            %span 必須
+          .item_input
+            %textarea.item_input--explain{placeholder: "商品の詳細を入力してください(1000文字以内)\n2015年に5000円で購入したグレーのTシャツです。"}
+      .new_product__item-content.formFlex
+        %h4 商品の詳細
+        .item-content-box
+          .content-formbox
+            %h3
+              カテゴリー
+              %span 必須
+            .select-box
+              .select-box__wrapper
+                %i.fa.fa-angle-down
+                %select.item-category
+                  %option(value) ---
+                  %option(value= "1")レディース
+                  %option(value= "2")メンズ
+                  %option(value= "3")ベビー•キッズ
+                  %option(value= "4")インテリア•住まい•小物
+                  %option(value= "5")本•音楽•ゲーム
+                  %option(value= "6")おもちゃ•ホビー•グッズ
+                  %option(value= "7")コスメ•香水•美容
+                  %option(value= "8")家電•スマホ•カメラ
+                  %option(value= "9")スポーツ•レジャー
+                  %option(value="10")ハンドメイド
+                  %option(value="11")チケット
+                  %option(value="12")自動車•オートバイ
+                  %option(value="13")その他
+              -# 子孫要素のカテゴリーは予めテーブルに登録されている情報をJSなどで追加する
+              .select-box__wrapper.display_none
+                %i.fa.fa-angle-down
+                %select.item-category-children
+                  %option(value selected) ---
+                  %option(value= "1")トップス
+                  %option(value= "2")ジャケット/アウター
+                  %option(value= "3")パンツ
+                  %option(value= "4")スカート
+                  %option(value= "5")ワンピース
+                  %option(value= "6")靴
+                  %option(value= "7")ルームウェア/パジャマ
+                  %option(value= "8")レッグウェア
+                  %option(value= "9")帽子
+                  %option(value="10")バッグ
+                  %option(value="11")アクセサリー
+                  %option(value="12")ヘアアクセサリー
+                  %option(value="13")小物
+                  %option(value="14")時計
+                  %option(value="15")ウィッグ
+                  %option(value="16")浴衣/水着
+                  %option(value="17")スーツ/フォーマル/ドレス
+                  %option(value="18")マタニティ
+                  %option(value="19")その他
+              .select-box__wrapper.display_none
+                %i.fa.fa-angle-down
+                %select.item-category-grandchildren
+                  %option(value selected) ---
+                  %option(value= "1") Tシャツ/カットソー(半袖/袖なし)
+                  %option(value= "2") Tシャツ/カットソー(長袖/七部)
+                  %option(value= "3") シャツ/ブラウス(半袖/袖なし)
+                  %option(value= "4") シャツ/ブラウス(長袖/七部)
+                  %option(value= "5") ポロシャツ
+                  %option(value= "6") キャミソール
+                  %option(value= "7") タンクトップ
+                  %option(value= "8") ホルターネック
+                  %option(value= "9") ニット/セーター
+                  %option(value="10") チュニック
+                  %option(value="11") カーディガン/ボレロ
+                  %option(value="12") アンサンブル
+                  %option(value="13") ベスト/ジレ
+                  %option(value="14") パーカー
+                  %option(value="15") トレーナー/スウェット
+                  %option(value="16") ペアトップ/チューブトップ
+                  %option(value="17") ジャージ
+                  %option(value="18") その他
+          .content-formbox
+            %h3
+              商品の状態
+              %span 必須
+            .select-box
+              .select-box__wrapper
+                %i.fa.fa-angle-down
+                %select.item-state
+                  %option(value) ---
+                  %option(value= "新品、未使用") 新品、未使用
+                  %option(value= "未使用に近い") 未使用に近い
+                  %option(value= "目立った傷や汚れはなし") 目立った傷や汚れはなし
+                  %option(value= "やや傷や汚れあり") やや傷や汚れあり
+                  %option(value= "傷や汚れあり") 傷や汚れあり
+                  %option(value= "全体的に状態が悪い") 全体的に状態が悪い
+      .new_product__item-content.formFlex
+        %h4 配送について
+        = link_to "？", "#", class: 'help-icon'
+        .item-content-box
+          .content-formbox
+            %h3
+              配送料の負担
+              %span 必須
+            .select-box
+              .select-box__wrapper
+                %i.fa.fa-angle-down
+                %select.delivery-fee
+                  %option(value) ---
+                  %option(value="送料込み(出品者負担)") 送料込み(出品者負担)
+                  %option(value="着払い(購入者負担)") 着払い(購入者負担)
+          .content-formbox
+            %h3
+              配送の方法
+              %span 必須
+            .select-box
+              .select-box__wrapper
+                %i.fa.fa-angle-down
+                %select.delivery-method
+                  %option(value) ---
+                  %option(value="未定") 未定
+                  %option(value="らくらくFURIMA便") らくらくFURIMA便
+                  %option(value="ゆうメール") ゆうメール
+                  %option(value="レターバッグ") レターバッグ
+                  %option(value="普通郵便(定型、定形外)") 普通郵便(定型、定形外)
+                  %option(value="クロネコヤマト") クロネコヤマト
+                  %option(value="ゆうパック") ゆうパック
+                  %option(value="クリックポスト") クリックポスト
+                  %option(value="ゆうパケット") ゆうパケット
+          .content-formbox
+            %h3
+              発送元の地域
+              %span 必須
+            .select-box
+              .select-box__wrapper
+                %i.fa.fa-angle-down
+                %select.delivery-area
+                  %option(value) ---
+                  %option(value="北海道") 北海道
+                  %option(value="青森県") 青森県
+                  %option(value="岩手県") 岩手県
+                  %option(value="宮城県") 宮城県
+                  %option(value="秋田県") 秋田県
+                  %option(value="山形県") 山形県
+                  %option(value="福島県") 福島県
+                  %option(value="茨城県") 茨城県
+                  %option(value="栃木県") 栃木県
+                  %option(value="群馬県") 群馬県
+                  %option(value="埼玉県") 埼玉県
+                  %option(value="千葉県") 千葉県
+                  %option(value="東京都") 東京都
+                  %option(value="神奈川県") 神奈川県
+                  %option(value="新潟県") 新潟県
+                  %option(value="富山県") 富山県
+                  %option(value="石川県") 石川県
+                  %option(value="福井県") 福井県
+                  %option(value="山梨県") 山梨県
+                  %option(value="長野県") 長野県
+                  %option(value="岐阜県") 岐阜県
+                  %option(value="静岡県") 静岡県
+                  %option(value="愛知県") 愛知県
+                  %option(value="三重県") 三重県
+                  %option(value="滋賀県") 滋賀県
+                  %option(value="京都府") 京都府
+                  %option(value="大阪府") 大阪府
+                  %option(value="兵庫県") 兵庫県
+                  %option(value="奈良県") 奈良県
+                  %option(value="和歌山県") 和歌山県
+                  %option(value="鳥取県") 鳥取県
+                  %option(value="島根県") 島根県
+                  %option(value="岡山県") 岡山県
+                  %option(value="広島県") 広島県
+                  %option(value="山口県") 山口県
+                  %option(value="徳島県") 徳島県
+                  %option(value="香川県") 香川県
+                  %option(value="愛媛県") 愛媛県
+                  %option(value="高知県") 高知県
+                  %option(value="福岡県") 福岡県
+                  %option(value="佐賀県") 佐賀県
+                  %option(value="長崎県") 長崎県
+                  %option(value="熊本県") 熊本県
+                  %option(value="大分県") 大分県
+                  %option(value="宮崎県") 宮崎県
+                  %option(value="鹿児島県") 鹿児島県
+                  %option(value="沖縄県") 沖縄県
+          .content-formbox
+            %h3
+              発送までの日数
+              %span 必須
+            .select-box
+              .select-box__wrapper
+                %i.fa.fa-angle-down
+                %select.delivery-ship
+                  %option(value) ---
+                  %option(value="1〜2で発送") 1〜2で発送
+                  %option(value="2〜3で発送") 2〜3で発送
+                  %option(value="4〜7で発送") 4〜7で発送
+      .new_product__item-content.formFlex
+        %h4 販売価格(300〜9,999,999)
+        =link_to "？", "#", class: 'help-icon'
+        .item-content-box
+          %ul
+            %li.price-group
+              .price-group--title
+                %h3
+                  価格
+                  %span 必須
+              .price-group--input
+                %p ¥
+                .selling-input
+                  %input.selling-input--form{min: "300", max: "9999999", type: "number", placeholder: "例）300"}
+            %li.price-group.border
+              .price-group--title 販売手数料(10%)
+              .price-group--input
+                .price-fee
+                  .price-fee--display --
+                  -# %script(src="") $('.selling-input--form').val()*0.1
+            %li.price-group.border
+              .price-group--title
+                %h3 販売利益
+              .price-group--input
+                .price-profit
+                  .price-profit--display --
+                  -# .selling-input--form - .price-fee
+      .new_product__item-content.consent-btn
+        .terms-box
+          %p
+            =link_to "禁止されている出品", "#", class: 'link_blue'
+            、
+            =link_to "行為", "#", class: 'link_blue'
+            を必ずご確認ください。
+          %p
+            またブランド品でシリアルナンバー等がある場合はご記載ください。
+            =link_to "偽ブランドの販売", "#", class: 'link_blue'
+            は犯罪であり処罰される可能性があります。
+          %p
+            また、出品をもちまして
+            =link_to "加盟店規約", "#", class: 'link_blue'
+            に同意したことになります。
+        %input.exhibit{type: 'submit', value: "出品する"}
+        =link_to "戻る", root_path, class: 'back-btn'
+
+  .item-new-body__footer
+    .footer__detail
+      = link_to "プライバシーポリシー", items_new_path
+      = link_to "FURIMA利用規約", items_new_path
+      = link_to "特定商取引に関する表記", items_new_path
+    .footer__logo
+      = link_to image_tag("logo-white", size: "180x50"), root_path
+    %p ©︎ 2020 FURIMA
