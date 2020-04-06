@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  resources "items/pay"
-  resources "items/show"
+  resources :items do
+    collection do
+      get 'pay'
+    end
+
+  resources :items,only: [:show]
+    end
+  
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: "users/sessions",
