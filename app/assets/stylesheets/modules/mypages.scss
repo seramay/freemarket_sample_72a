@@ -1,7 +1,7 @@
 .mypage-prduct {
   height: 1400px;
   background-color: #ddd;
-  padding: 40px 60px;
+  padding: 40px 180px;
   &__contents {
     float: right;
     width: 700px;
@@ -34,6 +34,10 @@
     .contents__content-tabs{
       background-color: #fff;
       .content-tabs__purchase  {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
         height: 80px;
         font-weight: bold;
       }
@@ -79,6 +83,26 @@
             .mylist__body {
               padding: 10px 10px;
               color: black;
+              justify-content: space-between;
+              i {
+                padding-right: 10px;
+                float: right;
+                color: #6D8BE8;
+              }
+              time {
+                padding-top: 10px;
+                float: left;
+                i {
+                  color: #3E606F
+                }
+              }
+              .comment {
+                padding-top: 10px;
+                float: left;
+                i {
+                  color: #3E606F
+                }
+              }
             }
           }
           .my-show {
@@ -115,7 +139,11 @@
             width: 100%;
           }
           i {
-            color: black;
+            float: right;
+            color: #6DBEE8;
+            padding-right: 15px;
+            padding-top: 7%;
+            font-size: 12px;
           }
         }
       }
