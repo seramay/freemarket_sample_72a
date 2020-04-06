@@ -1,6 +1,6 @@
 .user__new
   .new__title
-    = link_to "#" do
+    = link_to root_path do
       = image_tag src=("logo.png"), class: "title__image"
     %ul.new__lists
       %li.new__list
@@ -276,8 +276,8 @@
       %li
         特定商取引に関する表記
     .footer__icon
-      = link_to "#" do
+      = link_to root_path do
         = image_tag src=("logo-white.png"), class: "icon__image"
     .footer__text
-      %p 2020 Furima
-  = render "users/shared/links"
+      %p ©︎ 2020 Furima
+  -# = render "users/shared/links"
