@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  resources :items do
+  
+  resources :items, only: [:show] do
     collection do
       get 'pay'
     end
-
-  resources :items,only: [:show]
-    end
+  end
   
   devise_for :users, controllers: {
     registrations: 'users/registrations',
