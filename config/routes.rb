@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get "items/pay"
-  get "items/show"
+  resources "items/pay"
+  resources "items/show"
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: "users/sessions",
