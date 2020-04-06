@@ -1,3 +1,4 @@
+
 *{
   box-sizing: border-box;
 }
@@ -254,32 +255,8 @@
           font-weight: bold;
           font-size: 22px;
           position: relative;
+          }
         }
       }
     }
   }
-  &__footer{
-    width: 100%;
-    height: 80px;
-    background-color: gray;
-  }
-}
-
-.show-sold-cover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-top: 80px solid #4FCFD3;
-  border-right: 80px solid transparent;
-  border-bottom: 80px solid transparent;
-  border-left: 80px solid #4FCFD3;
-}
-.show-sold {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding-top: 25px;
-  font-size: 48px;
-  color: white;
-  transform: rotate(315deg); 
-}
