@@ -1,0 +1,197 @@
+.addresses__new {
+  background-color: $formGray;
+  width: 100vw;
+  height: 100%;
+  .addresses__title {
+    width: 100%;
+    height: 130px;
+    padding: 35px 0 0 380px;
+    display: flex;
+    position: relative;
+    z-index: 2;
+    .addresses__image {
+      height: 60px;
+    }
+    .new__lists {
+      width: 500px;
+      display: flex;
+      margin-left: 80px;
+      .new__list {
+        font-size: 12px;
+        margin-right: 40px;
+        .list__circle {
+          background-color: $formWhite;
+          width: 15px;
+          height: 15px;
+          border-radius: 50px;
+          margin: 10px auto 0;
+          &--red {
+            background-color: $formRed;
+            width: 15px;
+            height: 15px;
+            border-radius: 50px;
+            margin: 10px auto 0;
+          }
+        }
+      }
+    }
+  }
+  .new__border {
+    width: 225px;
+    height: 2px;
+    border-top: solid $formWhite;
+    position: absolute;
+    top: 69px;
+    right: 530px;
+    z-index: 1;
+  }
+  .addresses__form {
+    width: 100%;
+    height: 1250px;
+    .addresses__container {
+      background-color: $formWhite;
+      width: 700px;
+      height: 100%;
+      margin: 0 auto;
+      .container__title {
+        height: 100px;
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 100px;
+        border-bottom: 1px solid #f5f5f5;
+      }
+      .container__form {
+        width: 100%;
+        height: calc(100% - 100px);
+        padding: 25px 15px;
+        .addresses__field {
+          height: 100%;
+          width: 350px;
+          margin: 0 auto;
+          .user__name__field {
+            height: 180px;
+            width: 100%;
+            .field {
+              display: flex;
+              .field__require {
+                height: 25px;
+                width: 35px;
+                margin-left: 5px;
+                padding: 4px 4px;
+                font-size: 13px;
+                background-color: $formRed;
+                color: $formWhite;
+                border-radius: 5px;
+              }
+            }
+            input {
+              height: 50px;
+              width: 100%;
+              padding: 0 10px;
+              margin-top: 10px;
+              border-radius: 5px;
+              border: 1px solid $formGray;
+              outline: none;
+            }
+            input[type="text"]:focus {
+              border: 1px solid $formSky;
+            }
+          }
+          .address__field {
+            height: 100px;
+            width: 100%;
+            .field {
+              display: flex;
+              .field__require {
+                height: 25px;
+                width: 35px;
+                margin-left: 5px;
+                padding: 4px 4px;
+                font-size: 13px;
+                background-color: $formRed;
+                color: $formWhite;
+                border-radius: 5px;
+                &--any {
+                  height: 25px;
+                  width: 35px;
+                  margin-left: 5px;
+                  padding: 4px 4px;
+                  font-size: 13px;
+                  background-color: gray;
+                  color: $formWhite;
+                  border-radius: 5px;
+                }
+              }
+            }
+            input {
+              height: 50px;
+              width: 100%;
+              padding: 0 10px;
+              margin-top: 10px;
+              border-radius: 5px;
+              border: 1px solid $formGray;
+              outline: none;
+            }
+            input[type="text"]:focus {
+              border: 1px solid $formSky;
+            }
+            select {
+              background-color: $formWhite;
+              height: 50px;
+              width: 100%;
+              padding: 0 10px;
+              margin-top: 10px;
+              border-radius: 5px;
+              border: 1px solid $formGray;
+              outline: none;
+            }
+            select[name="prefecuture_code"]:focus {
+              border: 1px solid $formSky;
+            }
+          }
+          .address__btn {
+            height: 60px;
+            width: 100%;
+            background-color: $formRed;
+            margin-top: 20px;
+            text-align: center;
+            line-height: 60px;
+            .btn {
+              background-color: $formRed;
+              color: $formWhite;
+              cursor: pointer;
+              border-style: none;
+            }
+          }
+        }
+      }
+    }
+  }
+  .new__footer {
+    width: 450px;
+    height: 190px;
+    margin: 0 auto;
+    .footer__lists {
+      font-size: 11px;
+      color: #333;
+      display: flex;
+      justify-content: space-between;
+      margin: 40px 0;
+      cursor: pointer;
+    }
+    .footer__icon {
+      width: 100%;
+      height: 70px;
+      text-align: center;
+      .icon__image {
+        height: 60px;
+      }
+    }
+    .footer__text {
+      font-size: 11px;
+      text-align: center;
+      color: #333;
+    }
+  }
+}
