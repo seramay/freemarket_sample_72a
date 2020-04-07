@@ -1,17 +1,10 @@
 Rails.application.routes.draw do
   
-  resources :items, only: [:show] do
-    collection do
-      get 'pay'
-    end
-  end
-  
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: "users/sessions",
   }
-  resources :items, only: [:new]
-  resources :items do
+  resources :items, only: [:new, :show] do
     collection do
       get 'pay'
     end

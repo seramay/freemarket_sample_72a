@@ -5,6 +5,7 @@
   .item-new-body__main
     %h2 商品の情報の入力
     %form.new_product
+    = form_with url: new_item_path do |f|
       -# .alert-warning //エラー時にアラートボックスを表示
       .new_product__upload-images
         %h3 
@@ -164,11 +165,7 @@
             .select-box
               .select-box__wrapper
                 %i.fa.fa-angle-down
-                %select.delivery-area
-                  %option(value) ---
-                  - @prefectures.each do |prefecture|
-                    %option{value: "#{prefecture.name}"}
-                      = prefecture.name
+                =  f.collection_select :prefecture, Prefecture.all, :id, :name, prompt:'---', class: 'delivery-area'
           .content-formbox
             %h3
               発送までの日数
