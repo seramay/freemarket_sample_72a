@@ -4,8 +4,8 @@
       =link_to image_tag("logo", size: "180x50"), root_path
   .item-new-body__main
     %h2 商品の情報の入力
-    %form.new_product
-    = form_with url: new_item_path do |f|
+    -# %form.new_product
+    = form_with url: new_item_path, class: :new_product do |f|
       -# .alert-warning //エラー時にアラートボックスを表示
       .new_product__upload-images
         %h3 
