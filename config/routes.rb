@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   }
 
   resources :items, only: [:new, :show] do
+  resources :addresses, only: [:new, :create]
+  resources :items do
     collection do
       get 'pay'
     end
