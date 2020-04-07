@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     sessions: "users/sessions",
   }
 
-  resources :items, only: [:new, :show] do
+  resources :items, only: [:new, :show]
   resources :addresses, only: [:new, :create]
   resources :items do
     collection do
@@ -13,8 +13,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :mypages, only: [:show, :destroy] do
-  end
+  resources :mypages, only: [:show, :destroy]
 
   resources :cards, only: [:new, :create]
   resources :addresses, only: [:new, :create]
