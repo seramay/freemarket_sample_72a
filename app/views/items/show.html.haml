@@ -1,0 +1,124 @@
+.main
+  .main__show
+    .main__show__content
+      .main__show__content__top
+        .main__show__content__top__itemInfo
+          .main__show__content__top__itemInfo__name
+            鈴木ふく
+          .main__show__content__top__itemInfo__image
+            %ul.main__show__content__top__itemInfo__image__ul
+              = image_tag 'https://contents.oricon.co.jp/upimg/news/20190821/2142661_201908210620930001566375126c.jpg'
+              %li.main__show__content__top__itemInfo__image__ul
+              = image_tag 'https://i2.wp.com/sim-studio-unify.com/wp-content/uploads/2019/09/20190415-00064160-crankinn-000-1-view.jpg?fit=650%2C487&ssl=1', height: '87px', width: '140px', class: 'main__show__content__top__itemInfo__image__ul_li'
+              = image_tag 'https://i0.wp.com/entamix777.com/wp-content/uploads/2017/04/2335d730_Fotor.jpg?resize=300%2C240&ssl=1', alt: '', height: '87px', width: '140px', class: ''
+              = image_tag 'https://doramastars.com/wp-content/uploads/2018/06/ref_l.jpg', alt: '', height: '87px', width: '140px', class: ''
+              
+            .custom-thumb
+          .main__show__content__top__itemInfo__price
+            %span.main__show__content__top__itemInfo__price__span
+              ￥30000
+            .main__show__content__top__itemInfo__price__detail
+              %span.main__show__content__top__itemInfo__price__detail__span
+                (税込み)
+              %span.main__show__content__top__itemInfo__price__detail__span
+                送料込み
+          -# - if @item.status == 1 && user_signed_in?   　ーーーーーここ以降のコメントアウトはメンバーと共有した際に変数呼び出しする際に活用する予定ーーーーーーー
+          -#   - unless current_user.id == @item.user_id
+              .main__show__content__top__itemInfo__purchase
+          親譲りの無鉄砲で小供の時から損ばかりしている。小学校に居る時分学校の二階から飛び降りて一週間ほど腰を抜かした事がある。なぜそんな無闇をしたと聞く人があるかも知れぬ。別段深い理由でもない。新築の二階から首を出していたら、同級生の一人が冗談に、いくら威張っても、そこから飛び降りる事は出来まい。弱虫やーい。と囃したからである。小使に負ぶさって帰って来た時、おやじが大きな眼をして二階ぐらいから飛び降りて腰
+               
+          .main__show__content__top__itemInfo__detail
+            -# = @item.name
+          .main__show__content__top__itemInfo__table
+            %table.main__show__content__top__itemInfo__table__table
+              %tbody.main__show__content__top__itemInfo__table__table__tbody
+                %tr.main__show__content__top__itemInfo__table__table__tbody__tr
+                  %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
+                    出品者
+                  %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
+                    芦田愛菜
+                    -# = @item.user.nickname
+                %tr.main__show__content__top__itemInfo__table__table__tbody__tr
+                  %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
+                    カテゴリー
+                  %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
+                    %ul
+                      %li
+                        = link_to "{ベビー・キッズ}", "#", class: "main__show__content__top__itemInfo__table__table__tbody__tr__td__link" 
+                      %li
+                        = link_to "{ベビー服(男女兼用) ~95cm}", "#", class: "main__show__content__top__itemInfo__table__table__tbody__tr__td__link" 
+                      %li
+                        = link_to "{アウター}", "#", class: "main__show__content__top__itemInfo__table__table__tbody__tr__td__link" 
+                %tr.main__show__content__top__itemInfo__table__table__tbody__tr
+                  %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
+                    ブランド
+                  %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
+                    -# = @item.brand
+                %tr.main__show__content__top__itemInfo__table__table__tbody__tr
+                  %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
+                    商品のサイズ
+                  %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
+                    -# - unless @size.nil?
+                    -#   = @size.name
+                %tr.main__show__content__top__itemInfo__table__table__tbody__tr
+                  %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
+                    商品の状態
+                  %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
+                    未使用に近い
+                    -# = @item.condition
+                %tr.main__show__content__top__itemInfo__table__table__tbody__tr
+                  %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
+                    配送料の負担
+                  %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
+                    送料込み（出品者負担）
+                    -# = @item.shipping
+                %tr.main__show__content__top__itemInfo__table__table__tbody__tr
+                  %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
+                    発送元の地域
+                  %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
+                    岩手県
+                    -# = @item.shipping_area
+                %tr.main__show__content__top__itemInfo__table__table__tbody__tr
+                  %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
+                    発送日の目安
+                  %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
+                    4-7日で発送
+                    -# = @item.days_to_ship
+          .main__show__content__top__itemInfo__other  
+            %ul.main__show__content__top__itemInfo__other__left
+              %li.main__show__content__top__itemInfo__other__left__btn
+                = icon('fa','star',class: "main__show__content__top__itemInfo__other__left__btn__icon")
+                お気に入り 0
+            %ul.main__show__content__top__itemInfo__other__right
+              %li.main__show__content__top__itemInfo__other__right__list
+                = link_to "#", class: "main__show__content__top__itemInfo__other__right__list__btn" do
+                  = icon('fa','flag', class: "main__show__content__top__itemInfo__other__right__list__btn__icon")
+                  不適切な商品の通報
+        - if user_signed_in? && current_user.id == @item.user_id
+          .main__show__content__top__itemUser
+            .main__show__content__top__itemUser__edit
+              = link_to "商品の編集", edit_item_path(@item), class: "main__show__content__top__itemUser__edit__link"
+            .main__show__content__top__itemUser__destroy
+              = link_to "この商品を削除する", item_path(@item), method: :delete, class: "main__show__content__top__itemUser__destroy__link"
+        .main__show__content__top__commentArea
+          %form{action: "#", class: "main__show__content__top__commentArea__form"}
+            %textarea.main__show__content__top__commentArea__form__textarea
+            %p.main__show__content__top__commentArea__message
+              相手のことを考え丁寧なコメントを心がけましょう。
+              %br
+              不快な言葉遣いなどは利用制限や退会処分となることがあります。
+              %br
+            %button{name: "button", type: "submit", class: "main__show__content__top__commentArea__btn"}
+              = icon('fa', 'comment',class: "main__show__content__top__commentArea__btn__icon")
+              コメントする
+        %ul.main__show__content__top__aroundItems
+          %li.main__show__content__top__aroundItems__before
+            = link_to "#", class: "main__show__content__top__aroundItems__before__link" do
+              = icon('fa', 'angle-left', class: "main__show__content__top__aroundItems__before__link__icon")
+              前の商品
+          %li.main__show__content__top__aroundItems__after
+            = link_to  "#", class: "main__show__content__top__aroundItems__after__link"  do
+              後ろの商品
+              = icon('fa', 'angle-right', class: "main__show__content__top__aroundItems__after__link__icon")
+        .main__show__content__top__moreItems
+          = link_to "ベビーキッズをもっと見る", "#", class: "main__show__content__top__moreItems__link"
