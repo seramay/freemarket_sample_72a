@@ -68,7 +68,7 @@
 |order_day|string|null: false|
 |user_id|references|null: false, foreign_key: true|
 |item_id|references|null: false, foreign_key: true|
-|address_id|references|null: false, foreign_key: true|
+|deliver_address_id|references|null: false, foreign_key: true|
 ### association
 - belongs_to :user
 - belongs_to :item
