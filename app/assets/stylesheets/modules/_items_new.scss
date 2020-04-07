@@ -1,0 +1,328 @@
+.clearfix{
+  @include clearfix();
+}
+
+.formFlex{
+  @include formFlex();
+}
+
+// Each input field part
+.content-formbox{
+  margin-bottom: 40px;
+  // 必須マーク付き項目
+  h3{
+    @include formTitle();
+    span{
+      @include formSpan();
+    }
+  }
+  .item_input{
+    &--name{
+      width: 100%;
+      height: 48px;
+      margin-top: 8px;
+      padding: 10px 16px 8px;
+      border-radius: 4px;
+      background: #fff;
+      border: 1px solid #ccc;
+    }
+    &--explain{
+      width: 100%;
+      min-width: 100%;
+      min-height: 104px;
+      margin-top: 8px;
+      padding: 10px;
+      background: #fff;
+      border: 1px solid #ccc;
+    }
+  }
+  .select-box{
+    &__wrapper{
+      position: relative;
+      margin-top: 8px;
+      .fa-angle-down{
+        position: absolute;
+        top: 15%;
+        right: 16px;
+        font-size: 35px;
+        color: #888;
+      }
+      select{
+        width: 100%;
+        height: 48px;
+        background: 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 0 16px;
+        cursor: pointer;
+        position: relative;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        option{
+          padding: 0 2px 1px;
+        }
+      }
+      select::-ms-expand {
+        display: none;
+      }
+    }
+  }
+}
+
+///////////////////////////////////////////////////////////////////
+.item-new-body{
+  width: 100vw;
+  background-color: $formGray;
+  // ヘッダーFURIMAロゴ
+  &__header{
+    width: 100%;
+    height: 128px;
+    .header__logo{
+      width: 100%;
+      text-align: center;
+      img{
+        margin-top: 50px;
+      }
+    }
+  }
+  // フォーム全体
+  &__main{
+    width: 700px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 3px;
+    h2{
+      padding: 32px 16px;
+      font-size: 21px;
+      text-align: center;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    // フォームタグここから
+    .new_product{
+      border-top: 1px solid $formGray;
+      // 画像投稿欄
+      &__upload-images{
+        width: 680px;
+        padding: 40px;
+        h3{
+          @include formTitle();
+          span{
+            @include formSpan();
+          }
+        }
+        p{
+          margin: 8px 0 0;
+          font-size: 15px;
+        }
+        .images-drop{
+          height: 162px;
+          margin: 16px auto 0;
+          &__container{
+            .container-box{
+              width: 600px;
+              display: flex;
+              &__preview{
+                width: 120px;
+                height: 174px;
+                background-color: $formGray;
+                .preview--zone{
+                  width: 116px;
+                  height: 170px;
+                  margin: 2px;
+                  .img{
+                    width: 100%;
+                    height: 114px;
+                    padding-top: 20px;
+                    background-color: rgba(134, 62, 62, 0.5);
+                  }
+                  .buttons{
+                    display: flex;
+                    width: 116px;
+                    height: 32px;
+                    margin-top: 20px;
+                    &--edit{
+                      width: 50%;
+                      height: 32px;
+                      line-height: 32px;
+                      color: $formBlue;
+                      font-size: 14px;
+                      text-align: center;
+                      cursor: pointer;
+                    }
+                    &--delete{
+                      width: 50%;
+                      border-left: 1px solid #ccc;
+                      height: 32px;
+                      line-height: 32px;
+                      color: $formBlue;
+                      font-size: 14px;
+                      text-align: center;
+                      cursor: pointer;
+                    }
+                  }
+                }
+              }
+              &__area{
+                // 幅は全体に対して投稿された画像の枚数 *120px
+                width: calc(100% - 120px);
+                height: 174px;
+                min-width: 80px;
+                background-color: $formGray;
+                border: 1px dashed #ccc;
+                .images-label{
+                  display: inline-block;
+                  padding: 0;
+                  width: 100%;
+                  height: 100%;
+                  .images-input{
+                    input{
+                      display: none;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      // 商品名と商品の説明、商品の詳細(カテゴリーと状態)、配送欄、販売価格、注意書、の大枠
+      &__item-content{
+        border-top: 1px solid $formGray;
+        min-height: 300px;
+        padding: 40px 40px 0;
+        .item-content-box{
+          width: 400px;
+          margin: 0 0 0 auto;
+          ul{
+            .price-group{
+              padding-bottom: 24px;
+              display: flex;
+              &--title{
+                width: 50%;
+                line-height: 50px;
+                h3{
+                  @include formTitle();
+                  span{
+                    @include formSpan();
+                  }
+                }
+              }
+              &--input{
+                display: flex;
+                width: 50%;
+                height: 100%;
+                p{
+                  margin: auto 0;
+                }
+                .selling-input{
+                  width: 80%;
+                  margin-left: 10px;
+                  &--form{
+                    width: 100%;
+                    height: 48px;
+                    margin-top: 8px;
+                    padding: 10px 16px 8px;
+                    background: #fff;
+                    border: 1px solid #ccc;
+                    border-radius: 4px;
+                    text-align: right;
+                  }
+                }
+                .price-fee{
+                  width: 80%;
+                  text-align: right;
+                  margin: 15px 0;
+                  &--display{
+                    width: 100%;
+                    height: 100%;
+                  }
+                }
+                .price-profit{
+                  width: 80%;
+                  text-align: right;
+                  margin: 15px 0;
+                  &--display{
+                    width: 100%;
+                    height: 100%;
+                  }
+                }
+              }
+            }
+            .border{
+              border-top: 1px solid #ccc;
+            }
+          }
+        }
+        // 商品の詳細文字
+        h4{
+          color: #888;
+          font-size: 13px;
+          font-weight: bold;
+          display: inline-block;
+        }
+        .help-icon{
+          background-color: $formBlue;
+          width: 14px;
+          height: 14px;
+          font-size: 12px;
+          border-radius: 50%;
+          line-height: 14px;
+          text-align: center;
+          margin-top: 3px;
+        }
+      }
+    }
+    .consent-btn{
+      padding-bottom: 40px;
+      font-size: 14px;
+      .terms-box{
+        p{
+          .link_blue{
+            color: $formBlue;
+          }
+        }
+      }
+      .exhibit{
+        background-color: $formRed;
+        color: #fff;
+        display: block;
+        width: 100%;
+        margin-top: 40px;
+        line-height: 48px;
+        text-align: center;
+        cursor: pointer;
+      }
+      .back-btn{
+        background-color: #aaa;
+        display: block;
+        width: 45%;
+        margin: 24px auto 0;
+        line-height: 48px;
+        text-align: center;
+      }
+    }
+  }
+  // フッターFURIMAロゴ 
+  &__footer{
+    width: 100%;
+    height: 180px;
+    text-align: center;
+    .footer__detail{
+      width: 400px;
+      margin: 40px auto;
+      font-size: 11px;
+      letter-spacing: 1px;
+      display: flex;
+      justify-content: space-around;
+      a{
+        text-decoration: none;
+        color: #000;
+      }
+    }
+    p{
+      font-size: 11px;
+    }
+  }
+}
