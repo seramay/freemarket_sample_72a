@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   }
 
 
+  root "homes#top"
+
   resources :items, only: [:new, :show]
   resources :addresses, only: [:new, :create]
   resources :items do
@@ -21,5 +23,4 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root "homes#top"
 end
