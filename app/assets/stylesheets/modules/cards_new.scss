@@ -1,0 +1,167 @@
+a {
+  text-decoration: none;
+  color: $formWhite;
+}
+
+.cards-new-prduct {
+  height: 1400px;
+  background-color: #ddd;
+  padding: 40px 180px;
+}
+
+.cards__new {
+  background-color: $formGray;
+  width: 100vw;
+  height: 100%;
+  .cards__form {
+    width: 100%;
+    height: 650px;
+    .cards__container {
+      background-color: $formWhite;
+      width: 630px;
+      height: 100%;
+      margin: 0 auto;
+      .container__head {
+        height: 100px;
+        font-size: 25px;
+        font-weight: bold;
+        text-align: center;
+        line-height: 100px;
+        border-bottom: 1px solid #F5F5F5;
+      }
+      .card__form {
+        width: 100%;
+        height: 600px;
+        padding: 40px 40px;
+        .card__input {
+          width: 380px;
+          height: 100%;
+          margin: 0 auto;
+          .input__number {
+            width: 100%;
+            height: 120px;
+            margin-bottom: 40px;
+            .number__titles {
+              display: flex;
+              .number__require {
+                height: 25px;
+                width: 35px;
+                margin-left: 5px;
+                padding: 4px 4px;
+                font-size: 13px;
+                background-color: $formRed;
+                color: $formWhite;
+                border-radius: 5px;
+              }
+            }
+            input {
+              height: 50px;
+              width: 100%;
+              padding: 0 10px;
+              margin-top: 5px;
+              border-radius: 5px;
+              border: 1px solid $formGray;
+              outline: none;
+            }
+            .card__images {
+              display: flex;
+              margin-top: 10px;
+              .card__image {
+                height: 25px;
+                width: 35px;
+                margin-left: 10px;
+              }
+            }
+          }
+          .input__limit {
+            width: 100%;
+            height: 120px;
+            .limit__titles {
+              display: flex;
+              .limit__require {
+                height: 25px;
+                width: 35px;
+                margin-left: 5px;
+                padding: 4px 4px;
+                font-size: 13px;
+                background-color: $formRed;
+                color: $formWhite;
+                border-radius: 5px;
+              }
+            }
+            .card__limit {
+              height: 60px;
+              width: 100%;
+              margin-top: 10px;
+              select {
+                background-color: $formWhite;
+                height: 50px;
+                width: 150px;
+                border-radius: 5px;
+                border: 1px solid $formGray;
+                padding: 0 10px;
+                margin-left: 5px;
+                cursor: pointer;
+                outline: none;
+              }
+              span {
+                margin-left: 5px;
+              }
+            }
+          }
+          .input__code {
+            width: 100%;
+            height: 100px;
+            .code__titles {
+              display: flex;
+              .code__require {
+                height: 25px;
+                width: 35px;
+                margin-left: 5px;
+                padding: 4px 4px;
+                font-size: 13px;
+                background-color: $formRed;
+                color: $formWhite;
+                border-radius: 5px;
+              }
+            }
+            input {
+              height: 50px;
+              width: 100%;
+              padding: 0 10px;
+              margin-top: 5px;
+              border-radius: 5px;
+              border: 1px solid $formGray;
+              outline: none;
+            }
+          }  
+          .question {
+            width: 100%;
+            color: $formSky;
+            display: flex;
+            span {
+              font-size: 15px;
+              color: $formWhite;
+              background-color: #0099E8;
+              line-height: 20px;
+              text-align: center;
+              width: 20px;
+              height: 20px;
+              border-radius: 50px;
+            }
+          }
+          .regestration__btn {
+            height: 50px;
+            background-color: $formRed;
+            color: $formWhite;
+            font-size: 15px;
+            line-height: 50px;
+            margin-top: 20px;
+            text-align: center;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

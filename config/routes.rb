@@ -1,10 +1,21 @@
 Rails.application.routes.draw do
-  get 'items/pay'
-  get 'mypages/show'
+  
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: "users/sessions",
   }
+
+  resources :items, only: [:show] do
+    collection do
+      get 'pay'
+    end
+  end
+
+  resources :mypages, only: [:show, :destroy] do
+  end
+
+  resources :cards, only: [:new, :create]
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root "homes#top"
 end
