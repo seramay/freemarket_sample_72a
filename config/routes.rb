@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     sessions: "users/sessions",
   }
 
+
   resources :items, only: [:new, :show]
   resources :addresses, only: [:new, :create]
   resources :items do
