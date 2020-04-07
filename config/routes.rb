@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     sessions: "users/sessions",
   }
 
-  resources :items, only: [:show] do
+  resources :items, only: [:new, :show] do
+  resources :addresses, only: [:new, :create]
+  resources :items do
     collection do
       get 'pay'
     end
@@ -15,6 +17,7 @@ Rails.application.routes.draw do
   end
 
   resources :cards, only: [:new, :create]
+  resources :addresses, only: [:new, :create]
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root "homes#top"

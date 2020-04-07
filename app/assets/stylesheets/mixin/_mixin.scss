@@ -1,0 +1,26 @@
+@mixin formSpan(){
+  background-color: $formRed;
+  margin-left: 6px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  color: $formWhite;
+  font-size: 12px;
+  vertical-align: top;
+}
+
+@mixin formTitle(){
+  font-size: 16px;
+  font-weight: bold;
+}
+
+@mixin formFlex(){
+  display: flex;
+}
+
+@mixin clearfix() {
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
