@@ -4,7 +4,7 @@
       =link_to image_tag("logo", size: "180x50"), root_path
   .item-new-body__main
     %h2 商品の情報の入力
-    -# %form.new_product
+    -# = form_for @product do |f|   // Todo: form_withで、後インスタンスは@itemになると思われる。
     = form_with url: new_item_path, class: :new_product do |f|
       -# .alert-warning //エラー時にアラートボックスを表示
       .new_product__upload-images
@@ -14,17 +14,20 @@
         %p 最大5枚までアップロードできます
         .images-drop
           .images-drop__container
+            -# = f.fields_for :image do |image|   // Todo:記入の仕方！子階層はインデントを1個ずつずらすのを忘れない。
             .container-box
               .container-box__preview
                 .preview--zone
+                  -# // Todo: JSで画像が挿入されるたびに同じ要素を増やす
                   .img ※ 画像投稿部
                   .buttons
                     .buttons--edit 編集
                     .buttons--delete 削除
               .container-box__area
                 %label.images-label
+                -# = image.label :image, class: "dropzone-box", for: "upload-image__btn" do   // Todo: forオプション記入方法、JSイベント絡み？
                   .images-input
-                    -# ファイルが挿入されるたびに同じ要素を増やす,Todo JS
+                    -# = image.file_field :image, id: "upload-image__btn", class: "upload-image", 'data-image': 0, type: "file", name: "product[images_attributes][0][image]"
                     %input{type: "file"}
       .new_product__item-content
         .content-formbox
@@ -32,12 +35,14 @@
             商品名
             %span 必須
           .item_input
+            -# = f.text_field :name, id: "input-default",  placeholder: "商品名（必須 40文字まで)"
             %input.item_input--name{placeholder: "商品名(40文字まで)"}
         .content-formbox
           %h3
             商品の説明
             %span 必須
           .item_input
+            -# = f.text_area :detail, class: "items-new-form-area__default", placeholder:
             %textarea.item_input--explain{placeholder: "商品の詳細を入力してください(1000文字以内)\n2015年に5000円で購入したグレーのTシャツです。"}
       .new_product__item-content.formFlex
         %h4 商品の詳細
@@ -49,6 +54,7 @@
             .select-box
               .select-box__wrapper
                 %i.fa.fa-angle-down
+                -# = f.collection_select :category, @category, :id, :name, {prompt: '---'}, class: "k_ir_section__inner--form3-right-select-category", id: "category_parent"
                 %select.item-category
                   %option(value) ---
                   %option(value= "1")レディース
@@ -64,7 +70,7 @@
                   %option(value="11")チケット
                   %option(value="12")自動車•オートバイ
                   %option(value="13")その他
-              -# 子孫要素のカテゴリーは予めテーブルに登録されている情報をJSなどで追加する
+              -# 子孫要素のカテゴリーは予めテーブルに登録されている情報をJSなどで追加する、最初は非表示
               .select-box__wrapper.display_none
                 %i.fa.fa-angle-down
                 %select.item-category-children
@@ -112,11 +118,27 @@
                   %option(value="18") その他
           .content-formbox
             %h3
+              サイズ
+              %span 必須
+            .select-box
+              .select-box__wrapper
+                %i.fa.fa-angle-down
+                -# = f.select :condition, Product.conditions.keys,{prompt: '---'}
+                %select.item-condition
+                  %option(value) ---
+                  %option(value= "S") S
+                  %option(value= "M") M
+                  %option(value= "L") L
+                  %option(value= "LL") LL
+                  %option(value= "XL") XL
+          .content-formbox
+            %h3
               商品の状態
               %span 必須
             .select-box
               .select-box__wrapper
                 %i.fa.fa-angle-down
+                -# = f.select :state, Product.states.keys,{prompt: '---'}   // Todo: モデルにenum、そこからキー名引っ張るように記載を変更 => バリューでもよくね？
                 %select.item-state
                   %option(value) ---
                   %option(value= "新品、未使用") 新品、未使用
@@ -136,6 +158,7 @@
             .select-box
               .select-box__wrapper
                 %i.fa.fa-angle-down
+                -# = f.select :fee_payer, Product.fee_payers.keys,{prompt: '---'}   // Todo: モデルクラスenum
                 %select.delivery-fee
                   %option(value) ---
                   %option(value="送料込み(出品者負担)") 送料込み(出品者負担)
@@ -147,6 +170,7 @@
             .select-box
               .select-box__wrapper
                 %i.fa.fa-angle-down
+                -# = f.select :delivery, Product.deliveries.keys,{prompt: '---'}   // Todo: モデルクラスenum
                 %select.delivery-method
                   %option(value) ---
                   %option(value="未定") 未定
@@ -165,7 +189,8 @@
             .select-box
               .select-box__wrapper
                 %i.fa.fa-angle-down
-                =  f.collection_select :prefecture, Prefecture.all, :id, :name, prompt:'---', class: 'delivery-area'
+                // Todo: :prefecture_idカラム参照の下書き換え。
+                =  f.collection_select :prefecture_id, Prefecture.all, :id, :name, prompt:'---', class: 'delivery-area'
           .content-formbox
             %h3
               発送までの日数
@@ -173,6 +198,7 @@
             .select-box
               .select-box__wrapper
                 %i.fa.fa-angle-down
+                -# = f.select :delivery_time, Product.delivery_times.keys,{prompt: '---'}   // Todo: モデルenum
                 %select.delivery-ship
                   %option(value) ---
                   %option(value="1〜2日で発送") 1〜2日で発送
@@ -191,6 +217,7 @@
               .price-group--input
                 %p ¥
                 .selling-input
+                  -# = f.number_field :price, min:300, max:9999999, class: "input-default", id: "sell-price", placeholder: "例）300", value: ""
                   %input.selling-input--form{min: "300", max: "9999999", type: "number", placeholder: "例）300"}
             %li.price-group.border
               .price-group--title 販売手数料(10%)
@@ -220,6 +247,7 @@
             また、出品をもちまして
             =link_to "加盟店規約", "#", class: 'link_blue'
             に同意したことになります。
+        -# = f.submit "出品する", class:"button",id:"product_botton"
         %input.exhibit{type: 'submit', value: "出品する"}
         =link_to "戻る", root_path, class: 'back-btn'
 
