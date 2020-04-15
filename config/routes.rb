@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  
+  get 'purchases/index'
+  get 'purchases/done'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: "users/sessions",
@@ -17,8 +18,13 @@ Rails.application.routes.draw do
 
   resources :mypages, only: [:show, :destroy]
 
-  resources :cards, only: [:new, :create]
-  resources :addresses, only: [:new, :create]
+  resources :cards, only: [:new, :show, :create] do
+    collection do
+      post 'show', to: 'cards#show'
+      post 'pay', to: 'cards#pay'
+      post 'delete', to: 'cards#delete'
+    end
+  end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

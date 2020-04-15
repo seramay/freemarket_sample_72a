@@ -3,7 +3,7 @@
   width: 700px;
   background-color: #fff;
   float: right;
-  .card-contents__title {
+  &__title {
     height: 15%;
     border-bottom: 1px solid #ddd;
     text-align: center;
@@ -14,7 +14,7 @@
       line-height: 52px;
     }
   }
-  .card-contents__inner {
+  &__inner {
     height: 60%;
     padding: 30px 80px;
     border-bottom: 1px solid #ddd;
@@ -40,7 +40,7 @@
       float: right;
     }
   }
-  .card-contents__setting {
+  &__setting {
     height: 25%;
     text-align: right;
     padding-right: 40px;
