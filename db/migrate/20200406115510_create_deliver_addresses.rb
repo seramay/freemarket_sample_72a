@@ -6,7 +6,7 @@ class CreateDeliverAddresses < ActiveRecord::Migration[5.2]
       t.string :first_name_reading,   null: false
       t.string :last_name_reading,    null: false
       t.integer :post_code,           null: false
-      t.references :prefecture_id,    null: false
+      t.references :prefecture,       null: false
       t.string :address_city,         null: false
       t.string :address_street,       null: false
       t.string :address_building
