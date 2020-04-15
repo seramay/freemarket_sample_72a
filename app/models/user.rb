@@ -17,5 +17,5 @@ class User < ApplicationRecord
   validates :last_name_reading,  presence: true 
   validates :birthday_year,      presence: true
   validates :birthday_month,     presence: true
-  validates :birthday_date,      presence: true
+  validates :birthday_day,      presence: true
 end

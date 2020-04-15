@@ -127,9 +127,10 @@
                     padding: 15px 15px;
                     border: 1px solid #dedede;
                     font-size: 14px;
+                    color: black;
                     &__link{
                       text-decoration: none;
-                      color: #3CCACE;
+                      
                     }
                     &__link:hover {
                       text-decoration: underline;
@@ -260,3 +261,7 @@
       }
     }
   }
+  a {
+    text-decoration: none;
+    color: black;
+}
