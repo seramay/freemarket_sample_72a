@@ -4,11 +4,15 @@
       .main__show__content__top
         .main__show__content__top__itemInfo
           .main__show__content__top__itemInfo__name
-            鈴木ふく
+            = @item.name
           .main__show__content__top__itemInfo__image
             %ul.main__show__content__top__itemInfo__image__ul
               = image_tag 'https://contents.oricon.co.jp/upimg/news/20190821/2142661_201908210620930001566375126c.jpg'
-              %li.main__show__content__top__itemInfo__image__ul
+            - if @item.status == 1
+              .items-box_photo__sold
+                .items-box_photo__sold__inner
+                  SOLD
+            %li.main__show__content__top__itemInfo__image__ul
               = image_tag 'https://i2.wp.com/sim-studio-unify.com/wp-content/uploads/2019/09/20190415-00064160-crankinn-000-1-view.jpg?fit=650%2C487&ssl=1', height: '87px', width: '140px', class: 'main__show__content__top__itemInfo__image__ul_li'
               = image_tag 'https://i0.wp.com/entamix777.com/wp-content/uploads/2017/04/2335d730_Fotor.jpg?resize=300%2C240&ssl=1', alt: '', height: '87px', width: '140px', class: ''
               = image_tag 'https://doramastars.com/wp-content/uploads/2018/06/ref_l.jpg', alt: '', height: '87px', width: '140px', class: ''
@@ -16,17 +20,29 @@
             .custom-thumb
           .main__show__content__top__itemInfo__price
             %span.main__show__content__top__itemInfo__price__span
-              ￥30000
+              = @item.price
+              -# ￥30000
             .main__show__content__top__itemInfo__price__detail
               %span.main__show__content__top__itemInfo__price__detail__span
-                (税込み)
+                (税込み) /
               %span.main__show__content__top__itemInfo__price__detail__span
                 送料込み
-          -# - if @item.status == 1 && user_signed_in?   　ーーーーーここ以降のコメントアウトはメンバーと共有した際に変数呼び出しする際に活用する予定ーーーーーーー
+          -# - if @item.status == 1 && user_signed_in?
           -#   - unless current_user.id == @item.user_id
-              .main__show__content__top__itemInfo__purchase
-          親譲りの無鉄砲で小供の時から損ばかりしている。小学校に居る時分学校の二階から飛び降りて一週間ほど腰を抜かした事がある。なぜそんな無闇をしたと聞く人があるかも知れぬ。別段深い理由でもない。新築の二階から首を出していたら、同級生の一人が冗談に、いくら威張っても、そこから飛び降りる事は出来まい。弱虫やーい。と囃したからである。小使に負ぶさって帰って来た時、おやじが大きな眼をして二階ぐらいから飛び降りて腰
-               
+          .main__show__content__top__itemInfo__purchase
+            - if @item.status != 1
+              .main__show__content__top__itemInfo__purchase__a
+                = link_to '購入画面に進む', '/items/pay'
+            - if @item.status == 1
+              .main__show__content__top__itemInfo__purchase__b
+                %h3 売り切れました
+
+
+          .main__show__content__top__itemInfo__description
+            = @item.description
+            %br
+            親譲りの無鉄砲で小供の時から損ばかりしている。小学校に居る時分学校の二階から飛び降りて一週間ほど腰を抜かした事がある。なぜそんな無闇をしたと聞く人があるかも知れぬ。別段深い理由でもない。新築の二階から首を出していたら、同級生の一人が冗談に、いくら威張っても、そこから飛び降りる事は出来まい。弱虫やーい。と囃したからである。小使に負ぶさって帰って来た時、おやじが大きな眼をして二階ぐらいから飛び降りて腰
+              
           .main__show__content__top__itemInfo__detail
             -# = @item.name
           .main__show__content__top__itemInfo__table
