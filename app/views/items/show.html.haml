@@ -58,13 +58,13 @@
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     カテゴリー
                   %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
-                    %ul
-                      %li
-                        = link_to "{ベビー・キッズ}", "#", class: "main__show__content__top__itemInfo__table__table__tbody__tr__td__link" 
-                      %li
-                        = link_to "{ベビー服(男女兼用) ~95cm}", "#", class: "main__show__content__top__itemInfo__table__table__tbody__tr__td__link" 
-                      %li
-                        = link_to "{アウター}", "#", class: "main__show__content__top__itemInfo__table__table__tbody__tr__td__link" 
+                    = link_to items_path do
+                      = @parent.name
+                      %br
+                      = @child.name
+                      %br
+                      = @grandchild.name
+
                 %tr.main__show__content__top__itemInfo__table__table__tbody__tr
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     ブランド
