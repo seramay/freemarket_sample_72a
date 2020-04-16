@@ -1,49 +1,82 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
   def new
-    super
+    @user = User.new
   end
 
   # POST /resource
   def create
-    super
+    @user = User.new(sign_up_params)
+    unless @user.valid?
+      # バリデーションに引っかからないか確かめる
+      flash.now[:alert] = @user.errors.full_messages
+      render :new and return
+    end
+    # ユーザー登録で入力した情報をsessionで保持
+    session["devise.regist_data"] = {user: @user.attributes}
+    # sessionにハッシュオブジェクトの形で情報を保持させるために、attributesメソッドを用いてデータを整形
+    session["devise.regist_data"][:user]["password"] = params[:user][:password]
+    # attributesメソッドでデータ整形をした際にパスワードの情報は含まれていないため、パスワードを再度sessionに代入
+    @deliver_address = @user.build_deliver_address
+    # 生成したインスタンス@userに紐づくAddressモデルのインスタンスを生成
+    render :new_address
   end
 
-  # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def create_address
+    @user = User.new(session["devise.regist_data"]["user"])
+    @deliver_address = DeliverAddress.new(address_params)
+    unless @deliver_address.valid?
+      # バリデーションに引っかからないか確かめる
+      flash.now[:alert] = @deliver_address.errors.full_messages
+      render :new_address and return
+    end
+    @user.build_deliver_address(@deliver_address.attributes)
+    @user.save
+    # バリデーションチェックが完了した情報と、Sessionで保持していた情報とあわせ、ユーザー情報として保存すること
+    session["devise.regist_data"]["user"].clear
+    # clearメソッドを用いて明示的にsessionを削除します。
+    sign_in(:user, @user)
+  end
 
-  # PUT /resource
-  # def update
-  #   super
-  # end
+  # # GET /resource/edit
+  # # def edit
+  # #   super
+  # # end
 
-  # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  # # PUT /resource
+  # # def update
+  # #   super
+  # # end
 
-  # GET /resource/cancel
-  # Forces the session data which is usually expired after sign
-  # in to be expired now. This is useful if the user wants to
-  # cancel oauth signing in/up in the middle of the process,
-  # removing all OAuth session data.
-  # def cancel
-  #   super
-  # end
+  # # DELETE /resource
+  # # def destroy
+  # #   super
+  # # end
 
-  # protected
+  # # GET /resource/cancel
+  # # Forces the session data which is usually expired after sign
+  # # in to be expired now. This is useful if the user wants to
+  # # cancel oauth signing in/up in the middle of the process,
+  # # removing all OAuth session data.
+  # # def cancel
+  # #   super
+  # # end
+
+  protected
+
+  def address_params
+    params.require(:deliver_address).permit(:first_name, :last_name, :first_name_reading, :last_name_reading, :post_code, :prefecture_id, :address_city, :address_street, :address_building, :phone_number)
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
