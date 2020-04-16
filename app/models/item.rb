@@ -13,8 +13,6 @@ class Item < ApplicationRecord
   validates :ship_area,        presence: true
   validates :ship_day,         presence: true
   validates :ship_price,       presence: true
-  validates :category_id_1,    presence: true
-  validates :category_id_2,    presence: true
-  validates :category_id_3,    presence: true
+  validates :category_id,    presence: true
 
 end
