@@ -20,10 +20,7 @@ class MypagesController < ApplicationController
   end
 
   def set_category
-    @category_parent_array = []
-    Category.where(ancestry: nil).map do |parent|
-    @category_parent_array << parent
-    end
+    @category_parent_array = Category.where(ancestry: nil)
   end
 
 
