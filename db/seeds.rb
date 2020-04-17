@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+# require 'faker'
+# Faker::Config.locale = :ja
+
+# 作成例）
+# Brand.create!(name: "登録なし")

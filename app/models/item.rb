@@ -4,19 +4,25 @@ class Item < ApplicationRecord
   belongs_to :brand
   has_many :orders
   has_many :item_images
+  accepts_nested_attributes_for :item_images, allow_destroy: true
 
+  validates_associated :item_images
+  validates :item_images,      presence: true
   validates :name,             presence: true, length: {maximum: 40}
   validates :price,            presence: true
-  validates :description,      presence: true
+  validates :description,      presence: true, length: {maximum: 1000}
   validates :condition,        presence: true
   validates :size,             presence: true
   validates :ship_area,        presence: true
   validates :ship_day,         presence: true
   validates :ship_price,       presence: true
   validates :ship_method,      presence: true
-  validates :category_id_1,    presence: true
-  validates :category_id_2,    presence: true
-  validates :category_id_3,    presence: true
+  
+  # カテゴリ実装後まで仮置き
+  validates :category_id, presence: true
+  # validates :category_id_1,    presence: true
+  # validates :category_id_2,    presence: true
+  # validates :category_id_3,    presence: true
 
 
   enum size: { "S": "S", "M": "M", "L": "L", "LL": "LL", "XL": "XL"}, _prefix: true
