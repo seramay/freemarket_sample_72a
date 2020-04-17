@@ -1,7 +1,3 @@
-// 購入ページ
-
-
-// 購入完了ページ
 .purchase-completed {
   height: 100vh;
   width: 100%;
@@ -13,7 +9,7 @@
     background-color: #fff;
     margin: 0 auto;
     
-    .purchase-completed-box__done {
+    &__done {
       width: 100%;
       height: 20%;
       display: flex;
@@ -28,7 +24,7 @@
         margin-top: 5px;
       }
     }
-    .purchase-completed-box__notice {
+    &__notice {
       height: 40%;
       width: 100%;
       padding-top: 8%;
@@ -47,7 +43,7 @@
         }
       }
     }
-    .purchase-completed-box__information {
+    &__information {
       height: 40%;
       display: flex;
       .information__left-box {
