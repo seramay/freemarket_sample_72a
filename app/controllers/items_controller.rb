@@ -33,10 +33,9 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if @item.user.id == current_user.id
-    @item.destroy
-    redirect_to root_path
-    flash[:alert] = '削除しました。'    
+    if @item.user.id == current_user.id && @item.destroy
+      redirect_to root_path
+      flash[:alert] = '削除しました。'    
     else
       redirect_to root_path , notice: '自身の出品ではないため削除できません'
     end
@@ -61,8 +60,7 @@ class ItemsController < ApplicationController
   private
 
   def set_item
-    @item = Item.find(1)
-      # params[:id])
+    @item = Item.find_by(params[:id])
   end
     
 
