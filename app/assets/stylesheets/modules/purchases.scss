@@ -1,0 +1,82 @@
+.purchase-completed {
+  height: 100vh;
+  width: 100%;
+  background-color: #ddd;
+  padding-top: 15px;
+  .purchase-completed-box {
+    height: 400px;
+    width: 500px;
+    background-color: #fff;
+    margin: 0 auto;
+    
+    &__done {
+      width: 100%;
+      height: 20%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      .done__message {
+        font-size: 20px;
+      }
+      .done__icon {
+        padding-left: 13px;
+        margin-top: 5px;
+      }
+    }
+    &__notice {
+      height: 40%;
+      width: 100%;
+      padding-top: 8%;
+      border-bottom: 1px solid #ddd;
+      .notice__title {
+        h3 {
+        color: #FF048A;
+        text-align: center;
+        padding-bottom: 10px;
+        }
+      }
+      .notice__subtitle {
+        h4 {
+          font-size: 13px;
+          text-align: center;
+        }
+      }
+    }
+    &__information {
+      height: 40%;
+      display: flex;
+      .information__left-box {
+        width: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .left-box__image {
+          height: 120px;
+          width: 100px;
+          background-color: skyblue;
+        }
+      }
+      .information__right-box {
+        float: right;
+        width: 250px;
+        .right-box__name{
+          height: 60%;
+          font-size: 20px;
+          padding-top: 10px;
+        }
+        .right-box__prices {
+          height: 40%;
+          display: flex;
+          .prices__price {
+            font-size: 20px;
+          }
+          .prices__tax-included {
+            padding: 8px 10px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}

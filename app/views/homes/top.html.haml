@@ -17,10 +17,14 @@
         .brand
           = link_to 'ブランド', '#'
       .nav__right
-        .login
-          = link_to 'ログイン', new_user_session_path
-        .signin
-          = link_to '新規会員登録', new_user_registration_path
+        - if user_signed_in?
+          .login
+            = link_to 'マイページ', mypage_path(current_user.id)
+        - else
+          .login
+            = link_to 'ログイン', new_user_session_path
+          .signin
+            = link_to '新規会員登録', new_user_registration_path, data: {turbolinks: :false}
 
 
 .main
@@ -187,7 +191,7 @@
           
   .footer__logo
     = image_tag src=("logo-white.png"), class: "footerlogo"
-  %p.text
+  %p.textra
     © FURIMA
 
 .sellbtn

@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_09_104950) do
+ActiveRecord::Schema.define(version: 2020_04_15_102500) do
 
   create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cards", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "customer_id", null: false
+    t.string "card_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -30,12 +38,12 @@ ActiveRecord::Schema.define(version: 2020_04_09_104950) do
     t.string "last_name", null: false
     t.string "first_name_reading", null: false
     t.string "last_name_reading", null: false
-    t.integer "post_code", null: false
+    t.string "post_code", null: false
     t.bigint "prefecture_id", null: false
     t.string "address_city", null: false
     t.string "address_street", null: false
     t.string "address_building"
-    t.integer "phone_number"
+    t.string "phone_number"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -66,6 +74,7 @@ ActiveRecord::Schema.define(version: 2020_04_09_104950) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "ship_method", null: false
+    t.integer "status"
     t.index ["brand_id"], name: "index_items_on_brand_id"
     t.index ["category_id"], name: "index_items_on_category_id"
     t.index ["user_id"], name: "index_items_on_user_id"
@@ -87,7 +96,7 @@ ActiveRecord::Schema.define(version: 2020_04_09_104950) do
     t.string "nickname", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
-    t.integer "phone_number", null: false
+    t.string "phone_number", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "first_name_reading", null: false
