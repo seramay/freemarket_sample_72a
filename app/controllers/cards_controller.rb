@@ -54,7 +54,7 @@ class CardsController < ApplicationController
   private
 
   def set_card
-    @card = Card.where(user_id: 1).first
+    @card = Card.find_by(user_id: 1)
     # 1=current_user.id
   end
 end
