@@ -31,18 +31,20 @@ class ItemsController < ApplicationController
   
   def pay
     @item = Item.find(1)
+   #  1=params[:id]
   end
 
   def show
     @item = Item.find(1)
     @item_image = ItemImage.find(1)
-    @user = @item.user
-    @grandchild = Category.find(@item.category_id)  
-    @grandchildren = @grandchild.siblings
-    @child = @grandchild.parent
-    @parent = @child.parent
-    @children = @child.siblings
-    @parents = @parent.siblings
+    #  1=params[:id]
+    # @user = @item.user
+    # @grandchild = Category.find(@item.category_id)  
+    # @grandchildren = @grandchild.siblings
+    # @child = @grandchild.parent
+    # @parent = @child.parent
+    # @children = @child.siblings
+    # @parents = @parent.siblings
   end
 
   def set_item
