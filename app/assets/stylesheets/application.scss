@@ -4,7 +4,8 @@
 @import "modules/users_sign_up";
 @import "modules/users_sign_in";
 @import "modules/homes";
-@import "modules/addresses";
+@import "modules/addresses_new";
+@import "modules/addresses_create";
 @import "modules/items";
 @import "font-awesome-sprockets";
 @import "font-awesome";
@@ -12,3 +13,5 @@
 @import "modules/cards_new";
 @import "modules/items_new";
 @import "modules/show";
+@import "modules/cards_show";
+@import "modules/purchases";

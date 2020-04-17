@@ -9,19 +9,19 @@
             .item__image
               画像
             .item__name
-              商品名
+              = @item.name
           .inner__info
             .info__price
-              ¥10,000
+              = @item.price
             .info__point
               ポイントはありません
             .info__price-table
               .price-table__payment
                 支払金額
               .price-table__pay
-                ¥10,000
+                = @item.price
             .info__buy-btn
-              %a.btn-default{"data-method" => "GET"} 購入する
+              = link_to '購入する', '/purchases/index'
       .content__buy-user-info
         .buy-user-info__title
           配送先
@@ -35,7 +35,7 @@
           = link_to '変更する', '#'
       .content__buy-user-info
         .buy-user-info__title
-          支払方法
+          支払方法 
         .buy-user-info__text
           **** **** ****4242
           %br
