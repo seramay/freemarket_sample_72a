@@ -30,6 +30,8 @@ class ItemsController < ApplicationController
  
   
   def pay
+    @item = Item.find(1)
+   #  1=params[:id]
   end
 
   def destroy
@@ -42,6 +44,9 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @item = Item.find(1)
+    @item_image = ItemImage.find(1)
+    #  1=params[:id]
     @user = @item.user
     @grandchild = Category.find(@item.category_id)  
     @grandchildren = @grandchild.siblings
