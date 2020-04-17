@@ -19,14 +19,9 @@ class MypagesController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def set_user_current
-    @user = User.find(current_user.id)
-  end
-
-
   def set_category
     @category_parent_array = []
-    Category.where(ancestry: nil).each do |parent|
+    Category.where(ancestry: nil).map do |parent|
     @category_parent_array << parent
     end
   end
