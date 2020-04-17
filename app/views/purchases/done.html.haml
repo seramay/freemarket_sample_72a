@@ -1,0 +1,23 @@
+.purchase-completed
+  .purchase-completed-box
+    .purchase-completed-box__done
+      .done__message
+        購入が完了しました
+      .done__icon
+        = image_tag src=("shopbag.png"), size:"25x25"
+    .purchase-completed-box__notice
+      .notice__title
+        %h3 発送をお待ち下さい
+      .notice__subtitle
+        %h4 出品者からの発送通知をお待ちください
+    .purchase-completed-box__information
+      .information__left-box
+        .left-box__image
+      .information__right-box
+        .right-box__name
+          商品名
+        .right-box__prices
+          .prices__price
+            ¥13,000
+          .prices__tax-included
+            (税込み)
