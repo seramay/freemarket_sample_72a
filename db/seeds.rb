@@ -196,7 +196,7 @@
 Item.create!(
   [
     {
-      name: '1',
+      name: '2',
       description: 'スマホ',
       condition: '新品',
       ship_price: '無料',
@@ -205,6 +205,6 @@ Item.create!(
       price: 130000,
       size: 'M',
       brand_id: 1,
-      user_id: 1,
+      user_id: 7,
       category_id: 257
     }])

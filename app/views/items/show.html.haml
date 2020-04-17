@@ -20,15 +20,14 @@
             .custom-thumb
           .main__show__content__top__itemInfo__price
             %span.main__show__content__top__itemInfo__price__span
-              = @item.price
-              -# ￥30000
+              ¥
+              =@item.price
             .main__show__content__top__itemInfo__price__detail
               %span.main__show__content__top__itemInfo__price__detail__span
                 (税込み) /
               %span.main__show__content__top__itemInfo__price__detail__span
                 送料込み
-          -# - if @item.status == 1 && user_signed_in?
-          -#   - unless current_user.id == @item.user_id
+
           .main__show__content__top__itemInfo__purchase
             - if @item.status != 1
               .main__show__content__top__itemInfo__purchase__a
@@ -36,15 +35,9 @@
             - if @item.status == 1
               .main__show__content__top__itemInfo__purchase__b
                 %h3 売り切れました
-
-
+                
           .main__show__content__top__itemInfo__description
-            = @item.description
-            %br
-            親譲りの無鉄砲で小供の時から損ばかりしている。小学校に居る時分学校の二階から飛び降りて一週間ほど腰を抜かした事がある。なぜそんな無闇をしたと聞く人があるかも知れぬ。別段深い理由でもない。新築の二階から首を出していたら、同級生の一人が冗談に、いくら威張っても、そこから飛び降りる事は出来まい。弱虫やーい。と囃したからである。小使に負ぶさって帰って来た時、おやじが大きな眼をして二階ぐらいから飛び降りて腰
-              
           .main__show__content__top__itemInfo__detail
-            -# = @item.name
           .main__show__content__top__itemInfo__table
             %table.main__show__content__top__itemInfo__table__table
               %tbody.main__show__content__top__itemInfo__table__table__tbody
@@ -52,54 +45,50 @@
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     出品者
                   %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
-                    芦田愛菜
-                    -# = @item.user.nickname
+                    = @item.user.nickname
                 %tr.main__show__content__top__itemInfo__table__table__tbody__tr
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     カテゴリー
                   %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
-                    = link_to items_path do
-                      -# = @parent.name
+                    = link_to item_path do
+                      = @parent.name
                       %br
-                      -# = @child.name
+                      = @child.name
                       %br
-                      -# = @grandchild.name
+                      = @grandchild.name
 
                 %tr.main__show__content__top__itemInfo__table__table__tbody__tr
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     ブランド
                   %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
-                    -# = @item.brand
+                    = @item.brand
                 %tr.main__show__content__top__itemInfo__table__table__tbody__tr
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     商品のサイズ
                   %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
-                    -# - unless @size.nil?
-                    -#   = @size.name
+                    - unless @size.nil?
+                      = @size.name
                 %tr.main__show__content__top__itemInfo__table__table__tbody__tr
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     商品の状態
                   %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
-                    未使用に近い
-                    -# = @item.condition
+                    = @item.condition
                 %tr.main__show__content__top__itemInfo__table__table__tbody__tr
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     配送料の負担
                   %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
                     送料込み（出品者負担）
-                    -# = @item.shipping
+                    = @item.ship_price
                 %tr.main__show__content__top__itemInfo__table__table__tbody__tr
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     発送元の地域
                   %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
-                    岩手県
-                    -# = @item.shipping_area
+                    = @item.ship_area
                 %tr.main__show__content__top__itemInfo__table__table__tbody__tr
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     発送日の目安
                   %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
-                    4-7日で発送
-                    -# = @item.days_to_ship
+                    = @item.ship_day
           .main__show__content__top__itemInfo__other  
             %ul.main__show__content__top__itemInfo__other__left
               %li.main__show__content__top__itemInfo__other__left__btn
@@ -113,7 +102,7 @@
         - if user_signed_in? && current_user.id == @item.user_id
           .main__show__content__top__itemUser
             .main__show__content__top__itemUser__edit
-              = link_to "商品の編集", edit_item_path(@item), class: "main__show__content__top__itemUser__edit__link"
+              = link_to "商品の編集", item_path(@item), class: "main__show__content__top__itemUser__edit__link"
             .main__show__content__top__itemUser__destroy
               = link_to "この商品を削除する", item_path(@item), method: :delete, class: "main__show__content__top__itemUser__destroy__link"
         .main__show__content__top__commentArea
