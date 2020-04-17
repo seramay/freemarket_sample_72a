@@ -39,14 +39,11 @@ class ItemsController < ApplicationController
       redirect_to root_path
       flash[:alert] = '削除しました。'    
     else
-      redirect_to root_path , notice: '自身の出品ではないため削除できません'
+      redirect_to root_path , notice: '削除に失敗しました'
     end
   end
 
   def show
-    @item = Item.find(1)
-    @item_image = ItemImage.find(1)
-    #  1=params[:id]
     @user = @item.user
     @grandchild = Category.find(@item.category_id)  
     @grandchildren = @grandchild.siblings
@@ -65,7 +62,12 @@ class ItemsController < ApplicationController
   private
 
   def set_item
-    @item = Item.find_by(params[:id])
+    @item = Item.find(4)
+  end
+    
+  def items_params
+    # ここを編集する
+    params.require(:item).permit(:name,:description,:category_id, :status,:condition, :ship_price,:ship_area,:ship_days,:brand_id,images_attributes: [:image,:id,:_destroy]).merge(user_id: current_user.id)
   end
     
 
