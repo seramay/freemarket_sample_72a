@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  
+  get 'purchases/index'
+  get 'purchases/done'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
@@ -9,10 +10,7 @@ Rails.application.routes.draw do
     post 'addresses', to: 'users/registrations#create_address'
   end
   
-  root "homes#top"
-  
-  resources :items, only: [:new, :show]
-  resources :items do
+  resources :items, only: [:new, :show] do
     collection do
       get 'pay'
       get 'get_category_children', defaults: { format: 'json' }
@@ -21,8 +19,14 @@ Rails.application.routes.draw do
   end
   
   resources :mypages, only: [:show, :destroy]
-  resources :cards, only: [:new, :create]
-  
+
+  resources :cards, only: [:new, :show, :create, :destroy] do
+    collection do
+      post 'pay', to: 'cards#pay'
+    end
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  root "homes#top"
 end
