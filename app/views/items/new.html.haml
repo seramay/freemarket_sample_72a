@@ -48,8 +48,6 @@
             .select-box
               .select-box__wrapper
                 %i.fa.fa-angle-down
-                -# = f.select :size, Item.sizes.keys, prompt: '---', class: "item-size"  // .keysは不要。なしでもkeyが表示される
-                -# = f.select :size, Item.sizes.values,prompt: '---', class: "item-size"  // .valuesでバリュー側を表示
                 = f.select :size, Item.sizes, prompt: '---', class: "item_size"
           .content-formbox
             %h3
@@ -68,7 +66,6 @@
               .select-box__wrapper
                 %i.fa.fa-angle-down
                 = f.collection_select :brand_id , Brand.all , :id, :name, prompt: '---', class: "item_input--brand"
-              -# セレクトボックスの場合は上記のツリー構造を参照、
       .new_product__item-content.formFlex
         %h4 配送について
         = link_to "？", "https://www.mercari.com/jp/help_center/article/68/", class: 'help-icon'
@@ -148,9 +145,6 @@
         = f.submit "出品する", class:"exhibit", id:"product_botton"
         =link_to "戻る", root_path, class: 'back-btn'
 
-
-      
-        
   .item-new-body__footer
     .footer__detail
       = link_to "プライバシーポリシー", "https://www.mercari.com/jp/privacy/"
