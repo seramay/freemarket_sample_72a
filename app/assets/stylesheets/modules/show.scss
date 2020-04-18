@@ -12,11 +12,11 @@
     background: #f8f8f8;
     &__content{
       width: 700px;
-      height: 1800px;
+      height: 100%;
       margin: 0 auto;
       &__top{
         width: 700px;
-        height:1500px;
+        height: 100%;
         &__itemInfo{
           width: 700px;
           padding: 24px 40px 40px 40px;
@@ -35,6 +35,10 @@
             &__ul{
               margin: 0 8%;
               align-items: center;
+              .item__image {
+                width: 100%;
+                height: 100%;
+              }
               &__li{
                 display: flex;
                 justify-content: center;
@@ -92,9 +96,9 @@
               }
             }
           }
-          &__detail{
-            line-height: 1.5;
-            font-size: 18px;
+          &__description{
+            width: 100%;
+            height: 100%;
             margin-bottom: 30px;
           }
           &__table{
@@ -198,6 +202,17 @@
             }
           }
           &__destroy{
+            height: 50px;
+            background-color: #ea352d;
+            text-align: center;
+            &__link{
+              line-height: 50px;
+              color: #fff;
+              font-size: 20px;
+              font-weight: bold;
+            }
+          }
+          &__pay{
             height: 50px;
             background-color: #ea352d;
             text-align: center;
