@@ -15,9 +15,12 @@
     span{
       @include formSpan();
     }
+    .gray{
+      background-color: #999;
+    }
   }
   .item_input{
-    &--name{
+    &--name, &--brand{
       width: 100%;
       height: 48px;
       margin-top: 8px;
@@ -160,11 +163,10 @@
           margin: 16px auto 0;
           &__container{
             .container-box{
-              width: 600px;
+              width: 602px;
               display: flex;
               &__preview{
-                width: 120px;
-                height: 174px;
+                display: flex;
                 background-color: $formGray;
                 .preview--zone{
                   width: 116px;
@@ -174,7 +176,11 @@
                     width: 100%;
                     height: 114px;
                     padding-top: 20px;
-                    background-color: rgba(134, 62, 62, 0.5);
+                    text-align: center;
+                    img{
+                      max-width: 100%;
+                      max-height: 100%;
+                    }
                   }
                   .buttons{
                     display: flex;
@@ -182,6 +188,7 @@
                     height: 32px;
                     margin-top: 20px;
                     &--edit{
+                      display: inline-block;
                       width: 50%;
                       height: 32px;
                       line-height: 32px;
@@ -189,6 +196,9 @@
                       font-size: 14px;
                       text-align: center;
                       cursor: pointer;
+                      .editbtn{
+                        display: none;
+                      }
                     }
                     &--delete{
                       width: 50%;
@@ -204,19 +214,18 @@
                 }
               }
               &__area{
-                // 幅は全体に対して投稿された画像の枚数 *120px
-                width: calc(100% - 120px);
+                width: calc(100% - 0px);
                 height: 174px;
-                min-width: 80px;
                 background-color: $formGray;
                 border: 1px dashed #ccc;
+                cursor: pointer;
                 .images-label{
                   display: inline-block;
                   padding: 0;
                   width: 100%;
                   height: 100%;
                   .images-input{
-                    input{
+                    .upload-image{
                       display: none;
                     }
                   }
@@ -268,6 +277,11 @@
                     border-radius: 4px;
                     text-align: right;
                   }
+                  input[type="number"]::-webkit-outer-spin-button,
+                  input[type="number"]::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                  }
                 }
                 .price-fee{
                   width: 80%;
@@ -310,6 +324,16 @@
           line-height: 14px;
           text-align: center;
           margin-top: 3px;
+        }
+      }
+      .alert-warning{
+        border-top: 1px solid $formGray;
+        padding: 30px 30px 0;
+        ul{
+          li{
+            text-align: center;
+            color: $formRed;
+          }
         }
       }
     }

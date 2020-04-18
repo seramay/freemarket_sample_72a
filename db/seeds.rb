@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
+# require 'faker'
 # Faker::Config.locale = :ja
 #     name = Faker::Name.unique.name
 #     email = Faker::Internet.email

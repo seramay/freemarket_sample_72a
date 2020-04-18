@@ -1,7 +1,6 @@
 class DeliverAddress < ApplicationRecord
   belongs_to :user, optional: true
   has_many :orders
-
   validates :first_name,            presence: true, format: {with: /\A[ぁ-んァ-ン一-龥]/}
   validates :last_name,             presence: true, format: {with: /\A[ぁ-んァ-ン一-龥]/}
   validates :first_name_reading,    presence: true, format: {with: /\A[ァ-ロワヲンー \r\n\t]*\z/}
