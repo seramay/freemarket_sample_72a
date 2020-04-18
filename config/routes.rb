@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   
   root "homes#top"
   
-  resources :items, only: [:new, :show]
+  resources :items, only: [:index, :new, :edit, :update, :show, :destroy]
   resources :items do
     collection do
       get 'pay'
