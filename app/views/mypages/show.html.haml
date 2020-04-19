@@ -4,7 +4,7 @@
       .user-info__my-img
         = image_tag src=("member_photo_noimage_thumb.png"), class: "myicon"
       .user-info__my-name
-        akane
+        = current_user.nickname
       .user-info__user-info
         .user-info__evaluation
           評価  5
