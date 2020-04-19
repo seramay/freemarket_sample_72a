@@ -86,7 +86,6 @@ class ItemsController < ApplicationController
     if params.require(:item)[:brand_id] == ""
       params.require(:item)[:brand_id] = "4"
     end
-    # ここを編集する
     params.require(:item).permit(:name, :price, :description, :category_id, :status, :condition, :size, :ship_price, :ship_area, :ship_day, :ship_method, :brand_id, item_images_attributes: [:image_url, :id, :_destroy]).merge(user_id: current_user.id)
   end
 
