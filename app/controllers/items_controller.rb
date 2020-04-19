@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show,:destroy, :edit, :update]
+  before_action :set_item, only: [:show, :destroy, :edit, :update]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_category, only: [:new, :create]
 
   def index
     @item = Item.all
@@ -12,12 +13,6 @@ class ItemsController < ApplicationController
 
 
   def new
-    #セレクトボックスの初期値設定
-    @category_parent_array = ["---"]
-    #データベースから、親カテゴリーのみ抽出し、配列化
-    Category.where(ancestry: nil).each do |parent|
-      @category_parent_array << parent.name
-    end
     @item = Item.new
     @item.item_images.build
   end
@@ -75,6 +70,15 @@ class ItemsController < ApplicationController
   def set_item
     # ここを弄らないと@childがid4を参照するくさい
     @item = Item.find(4)
+  end
+
+  def set_category
+    #セレクトボックスの初期値設定
+    @category_parent_array = ["---"]
+    #データベースから、親カテゴリーのみ抽出し、配列化
+    Category.where(ancestry: nil).each do |parent|
+      @category_parent_array << parent.name
+    end
   end
     
   def item_params
