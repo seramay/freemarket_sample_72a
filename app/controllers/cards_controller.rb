@@ -4,8 +4,7 @@ class CardsController < ApplicationController
   before_action :set_card, only: [:show, :delete]
 
   def new
-    card = Card.where(user_id: 1)
-    # 1=current_user.id
+    card = Card.where(user_id: current_user.id)
     redirect_to action: "show" if card.exists?
   end
 
@@ -16,13 +15,10 @@ class CardsController < ApplicationController
     else
       customer = Payjp::Customer.create(
       description: '登録テスト', #なくてもOK
-      # email: current_user.email, #なくてもOK
       card: params['payjp-token'],
-      metadata: {user_id: 1}
-      # 1=current_user.id
+      metadata: {user_id: current_user.id}
       ) #念の為metadataにuser_idを入れましたがなくてもOK
-      @card = Card.new(user_id: 1, customer_id: customer.id, card_id: customer.default_card)
-      # 1=current_user.id
+      @card = Card.new(user_id: current_user.id, customer_id: customer.id, card_id: customer.default_card)
       if @card.save
         redirect_to action: "show"
       else
@@ -54,7 +50,6 @@ class CardsController < ApplicationController
   private
 
   def set_card
-    @card = Card.find_by(user_id: 1)
-    # 1=current_user.id
+    @card = Card.find_by(user_id: current_user.id)
   end
 end

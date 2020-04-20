@@ -18,7 +18,6 @@ class Item < ApplicationRecord
   validates :ship_price,       presence: true
   validates :category_id,      presence: true
   validates :ship_method,      presence: true
-  
   # カテゴリ実装後まで仮置き
   # validates :category_id_1,    presence: true
   # validates :category_id_2,    presence: true
