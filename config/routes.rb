@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   
   root "homes#top"
   
-  resources :items, only: [:index, :new, :edit, :update, :show, :destroy] do
+  resources :items do
     collection do
       get 'pay'
       get 'get_category_children', defaults: { format: 'json' }
