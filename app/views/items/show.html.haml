@@ -35,7 +35,7 @@
             = @item.name
           .main__show__content__top__itemInfo__image
             %ul.main__show__content__top__itemInfo__image__ul
-              = image_tag @item_image.image_url, class: "item__image"
+              = image_tag @item_image[0].image_url.url, class: "item__image"
               %li.main__show__content__top__itemInfo__image__ul
               = image_tag 'https://tab-log.com/wp-content/uploads/2018/12/macbookpro1-1000.jpg',alt: '商品の画像です',  height: '87px', width: '140px', class: 'main__show__content__top__itemInfo__image__ul_li'
               = image_tag 'https://www.pakutaso.com/shared/img/thumb/macbook1697_TP_V.jpg', alt: '商品の画像です', height: '87px', width: '140px', class: ''

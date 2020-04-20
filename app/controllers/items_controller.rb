@@ -69,7 +69,7 @@ class ItemsController < ApplicationController
 
   def set_item
     @item = Item.find(params[:id])
-    @item_image = ItemImage.find(@item.id)
+    @item_image = @item.item_images
   end
 
   def set_category
