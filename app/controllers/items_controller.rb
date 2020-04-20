@@ -68,8 +68,7 @@ class ItemsController < ApplicationController
   private
 
   def set_item
-    # ここを弄らないと@childがid4を参照するくさい
-    @item = Item.find(4)
+    @item = Item.find(params[:id])
   end
 
   def set_category
