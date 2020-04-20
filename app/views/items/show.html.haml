@@ -1,3 +1,31 @@
+.header
+  .header__inner
+    .inner__main
+      .main__icon 
+        = link_to root_path do
+          = image_tag src=("logo.png"), class: "topicon"
+      .main__searchbox
+        .form
+          %input#searchnput.searchbox__input{:name => "key", :placeholder => "キーワードから探す"}/
+          .searchbox__icon
+            %button{:type => "submit", :class => "btn"}
+              =image_tag scr=("icon-search 1.png"), class: "searchicon"
+    .inner__nav
+      .nav__left
+        .category
+          = link_to 'カテゴリ', '#'
+        .brand
+          = link_to 'ブランド', '#'
+      .nav__right
+        - if user_signed_in?
+          .login
+            = link_to 'マイページ', mypage_path(current_user.id)
+        - else
+          .login
+            = link_to 'ログイン', new_user_session_path
+          .signin
+            = link_to '新規会員登録', new_user_registration_path, data: {turbolinks: :false}
+
 .main
   .main__show
     .main__show__content
@@ -7,36 +35,27 @@
             = @item.name
           .main__show__content__top__itemInfo__image
             %ul.main__show__content__top__itemInfo__image__ul
-              = image_tag 'https://contents.oricon.co.jp/upimg/news/20190821/2142661_201908210620930001566375126c.jpg'
+              = image_tag @item_image[0].image_url.url, class: "item__image"
+              %li.main__show__content__top__itemInfo__image__ul
+              = image_tag 'https://tab-log.com/wp-content/uploads/2018/12/macbookpro1-1000.jpg',alt: '商品の画像です',  height: '87px', width: '140px', class: 'main__show__content__top__itemInfo__image__ul_li'
+              = image_tag 'https://www.pakutaso.com/shared/img/thumb/macbook1697_TP_V.jpg', alt: '商品の画像です', height: '87px', width: '140px', class: ''
+              = image_tag 'https://www.pakutaso.com/shared/img/thumb/macbook1683_TP_V.jpg', alt: '商品の画像です', height: '87px', width: '140px', class: ''
+            .custom-thumb
+          .main__show__content__top__itemInfo__price
+            %span.main__show__content__top__itemInfo__price__span
+              %span ¥
+              = @item.price
             - if @item.status == 1
               .items-box_photo__sold
                 .items-box_photo__sold__inner
                   SOLD
-            %li.main__show__content__top__itemInfo__image__ul
-              = image_tag 'https://i2.wp.com/sim-studio-unify.com/wp-content/uploads/2019/09/20190415-00064160-crankinn-000-1-view.jpg?fit=650%2C487&ssl=1', height: '87px', width: '140px', class: 'main__show__content__top__itemInfo__image__ul_li'
-              = image_tag 'https://i0.wp.com/entamix777.com/wp-content/uploads/2017/04/2335d730_Fotor.jpg?resize=300%2C240&ssl=1', alt: '', height: '87px', width: '140px', class: ''
-              = image_tag 'https://doramastars.com/wp-content/uploads/2018/06/ref_l.jpg', alt: '', height: '87px', width: '140px', class: ''
-              
-            .custom-thumb
-          .main__show__content__top__itemInfo__price
-            %span.main__show__content__top__itemInfo__price__span
-              ¥
-              =@item.price
             .main__show__content__top__itemInfo__price__detail
               %span.main__show__content__top__itemInfo__price__detail__span
                 (税込み) /
               %span.main__show__content__top__itemInfo__price__detail__span
                 送料込み
-
-          .main__show__content__top__itemInfo__purchase
-            - if @item.status != 1
-              .main__show__content__top__itemInfo__purchase__a
-                = link_to '購入画面に進む', '/items/pay'
-            - if @item.status == 1
-              .main__show__content__top__itemInfo__purchase__b
-                %h3 売り切れました
-                
           .main__show__content__top__itemInfo__description
+            = @item.description
           .main__show__content__top__itemInfo__detail
           .main__show__content__top__itemInfo__table
             %table.main__show__content__top__itemInfo__table__table
@@ -56,18 +75,17 @@
                       = @child.name
                       %br
                       = @grandchild.name
-
                 %tr.main__show__content__top__itemInfo__table__table__tbody__tr
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     ブランド
                   %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
-                    = @item.brand
+                    = @item.brand.name
                 %tr.main__show__content__top__itemInfo__table__table__tbody__tr
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     商品のサイズ
                   %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
-                    - unless @size.nil?
-                      = @size.name
+                    - unless @item.size.nil?
+                      = @item.size
                 %tr.main__show__content__top__itemInfo__table__table__tbody__tr
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     商品の状態
@@ -77,7 +95,6 @@
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     配送料の負担
                   %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
-                    送料込み（出品者負担）
                     = @item.ship_price
                 %tr.main__show__content__top__itemInfo__table__table__tbody__tr
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
@@ -99,31 +116,94 @@
                 = link_to "#", class: "main__show__content__top__itemInfo__other__right__list__btn" do
                   = icon('fa','flag', class: "main__show__content__top__itemInfo__other__right__list__btn__icon")
                   不適切な商品の通報
-        - if user_signed_in? && current_user.id == @item.user_id
-          .main__show__content__top__itemUser
-            .main__show__content__top__itemUser__edit
-              = link_to "商品の編集", item_path(@item), class: "main__show__content__top__itemUser__edit__link"
-            .main__show__content__top__itemUser__destroy
-              = link_to "この商品を削除する", item_path(@item), method: :delete, class: "main__show__content__top__itemUser__destroy__link"
-        .main__show__content__top__commentArea
-          %form{action: "#", class: "main__show__content__top__commentArea__form"}
-            %textarea.main__show__content__top__commentArea__form__textarea
-            %p.main__show__content__top__commentArea__message
-              相手のことを考え丁寧なコメントを心がけましょう。
-              %br
-              不快な言葉遣いなどは利用制限や退会処分となることがあります。
-              %br
-            %button{name: "button", type: "submit", class: "main__show__content__top__commentArea__btn"}
-              = icon('fa', 'comment',class: "main__show__content__top__commentArea__btn__icon")
-              コメントする
-        %ul.main__show__content__top__aroundItems
-          %li.main__show__content__top__aroundItems__before
-            = link_to "#", class: "main__show__content__top__aroundItems__before__link" do
-              = icon('fa', 'angle-left', class: "main__show__content__top__aroundItems__before__link__icon")
-              前の商品
-          %li.main__show__content__top__aroundItems__after
-            = link_to  "#", class: "main__show__content__top__aroundItems__after__link"  do
-              後ろの商品
-              = icon('fa', 'angle-right', class: "main__show__content__top__aroundItems__after__link__icon")
-        .main__show__content__top__moreItems
-          = link_to "ベビーキッズをもっと見る", "#", class: "main__show__content__top__moreItems__link"
+          - if user_signed_in? && current_user.id == @item.user_id
+            .main__show__content__top__itemUser
+              .main__show__content__top__itemUser__edit
+                = link_to "この商品を編集する", edit_item_path(@item), class: "main__show__content__top__itemUser__edit__link"
+              .main__show__content__top__itemUser__destroy
+                = link_to "この商品を削除する", item_path(@item), method: :delete, class: "main__show__content__top__itemUser__destroy__link"
+          - else
+            .main__show__content__top__itemUser
+              .main__show__content__top__itemUser__pay
+                = link_to "この商品を購入する", pay_items_path, class: "main__show__content__top__itemUser__pay__link"
+            - if @item.status == 1
+              .main__show__content__top__itemUser__pay__link
+                %h3 売り切れました
+          .main__show__content__top__commentArea
+            %form{action: "#", class: "main__show__content__top__commentArea__form"}
+              %textarea.main__show__content__top__commentArea__form__textarea
+              %p.main__show__content__top__commentArea__message
+                相手のことを考え丁寧なコメントを心がけましょう。
+                %br
+                不快な言葉遣いなどは利用制限や退会処分となることがあります。
+                %br
+              %button{name: "button", type: "submit", class: "main__show__content__top__commentArea__btn"}
+                = icon('fa', 'comment',class: "main__show__content__top__commentArea__btn__icon")
+                コメントする
+          %ul.main__show__content__top__aroundItems
+            %li.main__show__content__top__aroundItems__before
+              = link_to "#", class: "main__show__content__top__aroundItems__before__link" do
+                = icon('fa', 'angle-left', class: "main__show__content__top__aroundItems__before__link__icon")
+                前の商品
+            %li.main__show__content__top__aroundItems__after
+              = link_to  "#", class: "main__show__content__top__aroundItems__after__link"  do
+                後ろの商品
+                = icon('fa', 'angle-right', class: "main__show__content__top__aroundItems__after__link__icon")
+          .main__show__content__top__moreItems
+            = link_to "ベビーキッズをもっと見る", "#", class: "main__show__content__top__moreItems__link"
+.banner
+  .banner__inner
+    .inner__title
+      だれでもかんたん、人生を変えるフリマアプリ
+    .inner__text
+      今すぐ無料ダウンロード！
+    .inner__icon
+      .a__btn
+        = link_to "#" do
+          = image_tag src=("app-store.svg"),size:"260x70", class: "dlbtn"
+      .g__btn
+        = link_to "#" do
+          = image_tag src=("google-play.svg"),size:"260x70", class: "dlbtn"
+.footer
+  .footer__contents
+    .contents__content
+      .content__title
+        FURIMAについて
+      .content__list
+        %li
+          = link_to '会社概要（運営会社）', '#'
+        %li
+          = link_to 'プライバシーポリシー', '#'
+        %li
+          = link_to 'FURIMA利用規約', '#'
+        %li
+          = link_to 'ポイントに関する特約', '#'
+    .contents__content
+      .content__title
+        FURIMAを見る
+      .content__list
+        %li
+          = link_to 'カテゴリー一覧', '#'
+        %li
+          = link_to 'ブランド一覧', '#'
+    .contents__content
+      .content__title
+        ヘルプ＆ガイド
+      .content__list
+        %li
+          = link_to 'FURIMAガイド', '#'
+        %li
+          = link_to 'FURIMAロゴ利用ガイドライン', '#'
+        %li
+          = link_to 'お知らせ', '#'
+        
+  .footer__logo
+    = image_tag src=("logo-white.png"), class: "footerlogo"
+  %p.textra
+    © FURIMA
+
+.sellbtn
+  %span.sellbtn__text
+    出品する
+  .sellbtn__icon
+    = link_to image_tag("icon_camera", size: "80x80"), new_item_path, class: "camera"

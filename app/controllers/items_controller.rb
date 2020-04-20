@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show,:destroy, :edit, :update]
+  before_action :set_item, only: [:show, :destroy, :edit, :update]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_category, only: [:new, :create]
 
   def index
     @item = Item.all
@@ -11,26 +13,30 @@ class ItemsController < ApplicationController
 
 
   def new
-      #セレクトボックスの初期値設定
-      @category_parent_array = ["---"]
-      #データベースから、親カテゴリーのみ抽出し、配列化
-      Category.where(ancestry: nil).each do |parent|
-      @category_parent_array << parent.name
-      end
+    @item = Item.new
+    @item.item_images.build
   end
-
+  
   def get_category_children 
     @category_children = Category.find_by(name: "#{params[:parent_name]}", ancestry: nil).children
-    end
+  end
   # Ajax通信で送られてきたデータをparamsで受け取り､childrenで子を取得
-
+  
   def get_category_grandchildren
     @category_grandchildren = Category.find("#{params[:child_id]}").children
+  end
+  
+  def create
+    @item = Item.new(item_params)
+    if @item.save
+      redirect_to controller: :homes, action: :top
+    else
+      render "new"
     end
- 
+  end
   
   def pay
-    @item = Item.find(1)
+    @item = Item.find(id: params[:id])
    #  1=params[:id]
   end
 
@@ -62,18 +68,31 @@ class ItemsController < ApplicationController
     @parents = @parent.siblings
   end
 
+  def edit
+  end
+
+  def update
+  end
+
   private
 
 
   def set_item
-    @item = Item.find(4)
+    @item = Item.find(params[:id])
+    @item_image = @item.item_images
   end
-    
-  def items_params
-    # ここを編集する
-    params.require(:item).permit(:name,:description,:category_id, :status,:condition, :ship_price,:ship_area,:ship_days,:brand_id,images_attributes: [:image,:id,:_destroy]).merge(user_id: current_user.id)
-  end
-    
 
-  
+  def set_category
+    @category_parent_array = Category.where(ancestry: nil).pluck(:name)
+  end
+    
+  def item_params
+    # brand_idセレクトボックスがユーザーによって選択されなかった場合、「その他」もしくは「登録なし」のようなレコードを代入
+    if params.require(:item)[:brand_id] == ""
+      params.require(:item)[:brand_id] = "4"
+    end
+    params.require(:item).permit(:name, :price, :description, :category_id, :status, :condition, :size, :ship_price, :ship_area, :ship_day, :ship_method, :brand_id, item_images_attributes: [:image_url, :id, :_destroy]).merge(user_id: current_user.id)
+  end
+
 end
+

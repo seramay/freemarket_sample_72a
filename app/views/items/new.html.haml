@@ -4,9 +4,8 @@
       =link_to image_tag("logo", size: "180x50"), root_path
   .item-new-body__main
     %h2 商品の情報の入力
-    -# %form.new_product
-    = form_with url: new_item_path, class: :new_product do |f|
-      -# .alert-warning //エラー時にアラートボックスを表示
+    = form_with scope: :item, model: @item, class: :new_product, local: true, multipart: true do |f|
+      = render 'layouts/error_messages', model: f.object
       .new_product__upload-images
         %h3 
           出品画像
@@ -14,31 +13,23 @@
         %p 最大5枚までアップロードできます
         .images-drop
           .images-drop__container
-            .container-box
-              .container-box__preview
-                .preview--zone
-                  .img ※ 画像投稿部
-                  .buttons
-                    .buttons--edit 編集
-                    .buttons--delete 削除
-              .container-box__area
-                %label.images-label
-                  .images-input
-                    -# ファイルが挿入されるたびに同じ要素を増やす,Todo JS
-                    %input{type: "file"}
+            = f.fields_for :item_images, @item.item_images.build do |i|
+              .container-box
+                .container-box__preview#preview
+                .container-box__area
       .new_product__item-content
         .content-formbox
           %h3
             商品名
             %span 必須
           .item_input
-            %input.item_input--name{placeholder: "商品名(40文字まで)"}
+            = f.text_field :name, class: "item_input--name", id: "input-default", maxlength: 40,  placeholder: "商品名(40文字まで)"
         .content-formbox
           %h3
             商品の説明
             %span 必須
           .item_input
-            %textarea.item_input--explain{placeholder: "商品の詳細を入力してください(1000文字以内)\n2015年に5000円で購入したグレーのTシャツです。"}
+            =f.text_area :description, class: "item_input--explain", maxlength: 1000, placeholder: "商品の詳細を入力してください(1000文字以内)\n2015年に5000円で購入したグレーのTシャツです。"
       .new_product__item-content.formFlex
         %h4 商品の詳細
         .listing-form-box
@@ -48,9 +39,16 @@
               %span 必須
             .listing-select-wrapper
               .listing-select-wrapper__box
-                = f.select :category, @category_parent_array, {}, {class: 'listing-select-wrapper__box--select', id: 'parent_category'} 
+                = f.select :category_id, @category_parent_array, {prompt: '---'}, {class: 'listing-select-wrapper__box--select', id: 'parent_category'} 
                 %i.fas.fa-angle-down.listing-select-wrapper__box--arrow-down
-                
+          .content-formbox
+            %h3
+              サイズ
+              %span 必須
+            .select-box
+              .select-box__wrapper
+                %i.fa.fa-angle-down
+                = f.select :size, Item.sizes, prompt: '---', class: "item_size"
           .content-formbox
             %h3
               商品の状態
@@ -58,17 +56,19 @@
             .select-box
               .select-box__wrapper
                 %i.fa.fa-angle-down
-                %select.item-state
-                  %option(value) ---
-                  %option(value= "新品、未使用") 新品、未使用
-                  %option(value= "未使用に近い") 未使用に近い
-                  %option(value= "目立った傷や汚れはなし") 目立った傷や汚れはなし
-                  %option(value= "やや傷や汚れあり") やや傷や汚れあり
-                  %option(value= "傷や汚れあり") 傷や汚れあり
-                  %option(value= "全体的に状態が悪い") 全体的に状態が悪い
+                = f.select :condition, Item.conditions, prompt: '---', class: "item_condition"
+          .content-formbox
+            %h3
+              ブランド
+              %span.gray 
+                任意
+            .select-box
+              .select-box__wrapper
+                %i.fa.fa-angle-down
+                = f.collection_select :brand_id , Brand.all , :id, :name, prompt: '---', class: "item_input--brand"
       .new_product__item-content.formFlex
         %h4 配送について
-        = link_to "？", "#", class: 'help-icon'
+        = link_to "？", "https://www.mercari.com/jp/help_center/article/68/", class: 'help-icon'
         .item-content-box
           .content-formbox
             %h3
@@ -77,10 +77,7 @@
             .select-box
               .select-box__wrapper
                 %i.fa.fa-angle-down
-                %select.delivery-fee
-                  %option(value) ---
-                  %option(value="送料込み(出品者負担)") 送料込み(出品者負担)
-                  %option(value="着払い(購入者負担)") 着払い(購入者負担)
+                = f.select :ship_price, Item.ship_prices, prompt: '---', class: "ship_fee"
           .content-formbox
             %h3
               配送の方法
@@ -88,17 +85,7 @@
             .select-box
               .select-box__wrapper
                 %i.fa.fa-angle-down
-                %select.delivery-method
-                  %option(value) ---
-                  %option(value="未定") 未定
-                  %option(value="らくらくFURIMA便") らくらくFURIMA便
-                  %option(value="ゆうメール") ゆうメール
-                  %option(value="レターバッグ") レターバッグ
-                  %option(value="普通郵便(定型、定形外)") 普通郵便(定型、定形外)
-                  %option(value="クロネコヤマト") クロネコヤマト
-                  %option(value="ゆうパック") ゆうパック
-                  %option(value="クリックポスト") クリックポスト
-                  %option(value="ゆうパケット") ゆうパケット
+                = f.select :ship_method, Item.ship_methods, prompt: '---', class: "ship_method"
           .content-formbox
             %h3
               発送元の地域
@@ -106,7 +93,7 @@
             .select-box
               .select-box__wrapper
                 %i.fa.fa-angle-down
-                =  f.collection_select :prefecture, Prefecture.all, :id, :name, prompt:'---', class: 'delivery-area'
+                =  f.collection_select :ship_area, Prefecture.all, :id, :name, prompt:'---', class: "ship_area"
           .content-formbox
             %h3
               発送までの日数
@@ -114,14 +101,10 @@
             .select-box
               .select-box__wrapper
                 %i.fa.fa-angle-down
-                %select.delivery-ship
-                  %option(value) ---
-                  %option(value="1〜2日で発送") 1〜2日で発送
-                  %option(value="2〜3日で発送") 2〜3日で発送
-                  %option(value="4〜7日で発送") 4〜7日で発送
+                = f.select :ship_day, Item.ship_days, prompt: '---', class: "ship_day"
       .new_product__item-content.formFlex
         %h4 販売価格(300〜9,999,999)
-        =link_to "？", "#", class: 'help-icon'
+        =link_to "？", "https://www.mercari.com/jp/help_center/article/64/", class: 'help-icon'
         .item-content-box
           %ul
             %li.price-group
@@ -132,46 +115,41 @@
               .price-group--input
                 %p ¥
                 .selling-input
-                  %input.selling-input--form{min: "300", max: "9999999", type: "number", placeholder: "例）300"}
+                  = f.number_field :price, min:300, max:9999999, class: "selling-input--form", id: "sell-price", placeholder: "例）300", value: ""
             %li.price-group.border
               .price-group--title 販売手数料(10%)
               .price-group--input
                 .price-fee
-                  .price-fee--display --
-                  -# %script(src="") $('.selling-input--form').val()*0.1
+                  .price-fee--display 
             %li.price-group.border
               .price-group--title
                 %h3 販売利益
               .price-group--input
                 .price-profit
-                  .price-profit--display --
-                  -# .selling-input--form - .price-fee
+                  .price-profit--display 
       .new_product__item-content.consent-btn
         .terms-box
           %p
-            =link_to "禁止されている出品", "#", class: 'link_blue'
+            =link_to "禁止されている出品", "https://www.mercari.com/jp/help_center/getting_started/prohibited_items/", class: 'link_blue'
             、
-            =link_to "行為", "#", class: 'link_blue'
+            =link_to "行為", "https://www.mercari.com/jp/help_center/getting_started/prohibited_conduct/", class: 'link_blue'
             を必ずご確認ください。
           %p
             またブランド品でシリアルナンバー等がある場合はご記載ください。
-            =link_to "偽ブランドの販売", "#", class: 'link_blue'
+            =link_to "偽ブランドの販売", "https://www.mercari.com/jp/help_center/getting_started/counterfeit_goods/", class: 'link_blue'
             は犯罪であり処罰される可能性があります。
           %p
             また、出品をもちまして
-            =link_to "加盟店規約", "#", class: 'link_blue'
+            =link_to "加盟店規約", "https://www.mercari.com/jp/help_center/getting_started/counterfeit_goods/", class: 'link_blue'
             に同意したことになります。
-        %input.exhibit{type: 'submit', value: "出品する"}
+        = f.submit "出品する", class:"exhibit", id:"product_botton"
         =link_to "戻る", root_path, class: 'back-btn'
 
-
-      
-        
   .item-new-body__footer
     .footer__detail
-      = link_to "プライバシーポリシー", new_item_path
-      = link_to "FURIMA利用規約", new_item_path
-      = link_to "特定商取引に関する表記", new_item_path
+      = link_to "プライバシーポリシー", "https://www.mercari.com/jp/privacy/"
+      = link_to "FURIMA利用規約", "https://www.mercari.com/jp/tos/"
+      = link_to "特定商取引に関する表記", "https://www.mercari.com/jp/tokutei/"
     .footer__logo
       = link_to image_tag("logo-white", size: "180x50"), root_path
     %p ©︎ 2020 FURIMA
