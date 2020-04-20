@@ -74,20 +74,14 @@ class ItemsController < ApplicationController
   def destroy
   end
 
-  def set_item
-    @item = Item.find(1)
-    @item_image = ItemImage.find(@item.id)
-      #  params[:id])
-    
-  end
-
 
 
   private
 
   def set_item
     # ここを弄らないと@childがid4を参照するくさい
-    @item = Item.find(4)
+    @item = Item.find(1)
+    @item_image = ItemImage.find(@item.id)
   end
 
   def set_category
