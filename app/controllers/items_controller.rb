@@ -13,12 +13,6 @@ class ItemsController < ApplicationController
 
 
   def new
-    #セレクトボックスの初期値設定
-    @category_parent_array = ["---"]
-    #データベースから、親カテゴリーのみ抽出し、配列化
-    Category.where(ancestry: nil).each do |parent|
-    @category_parent_array << parent.name
-    end
     @item = Item.new
     @item.item_images.build
   end
@@ -75,22 +69,16 @@ class ItemsController < ApplicationController
   end
 
 
-
   private
 
   def set_item
     # ここを弄らないと@childがid4を参照するくさい
-    @item = Item.find(1)
+    @item = Item.find(4)
     @item_image = ItemImage.find(@item.id)
   end
 
   def set_category
-    #セレクトボックスの初期値設定
-    @category_parent_array = ["---"]
-    #データベースから、親カテゴリーのみ抽出し、配列化
-    Category.where(ancestry: nil).each do |parent|
-      @category_parent_array << parent.name
-    end
+    @category_parent_array = Category.where(ancestry: nil).pluck(:name)
   end
     
   def item_params
