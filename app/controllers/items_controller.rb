@@ -72,8 +72,7 @@ class ItemsController < ApplicationController
   private
 
   def set_item
-    # ここを弄らないと@childがid4を参照するくさい
-    @item = Item.find(4)
+    @item = Item.find(params[:id])
     @item_image = ItemImage.find(@item.id)
   end
 
