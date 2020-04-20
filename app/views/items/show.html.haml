@@ -45,13 +45,18 @@
             %span.main__show__content__top__itemInfo__price__span
               %span ¥
               = @item.price
+            - if @item.status == 1
+              .items-box_photo__sold
+                .items-box_photo__sold__inner
+                  SOLD
             .main__show__content__top__itemInfo__price__detail
               %span.main__show__content__top__itemInfo__price__detail__span
-                (税込み)
+                (税込み) /
               %span.main__show__content__top__itemInfo__price__detail__span
                 送料込み
           .main__show__content__top__itemInfo__description
             = @item.description
+          .main__show__content__top__itemInfo__detail
           .main__show__content__top__itemInfo__table
             %table.main__show__content__top__itemInfo__table__table
               %tbody.main__show__content__top__itemInfo__table__table__tbody
@@ -64,7 +69,7 @@
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     カテゴリー
                   %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
-                    = link_to items_path do
+                    = link_to item_path do
                       = @parent.name
                       %br
                       = @child.name
@@ -121,6 +126,9 @@
             .main__show__content__top__itemUser
               .main__show__content__top__itemUser__pay
                 = link_to "この商品を購入する", pay_items_path, class: "main__show__content__top__itemUser__pay__link"
+            - if @item.status == 1
+              .main__show__content__top__itemUser__pay__link
+                %h3 売り切れました
           .main__show__content__top__commentArea
             %form{action: "#", class: "main__show__content__top__commentArea__form"}
               %textarea.main__show__content__top__commentArea__form__textarea

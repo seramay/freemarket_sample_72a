@@ -3,7 +3,7 @@
     .side__nav
       .nav__lists
         .lists__list
-          = link_to 'マイページ', '#', class:'mylist'
+          = link_to 'マイページ', mypage_path(current_user.id), class:'mylist'
           %i.fas.fa-chevron-right
         .lists__list
           = link_to 'お知らせ', '#', class:'mylist'
@@ -81,8 +81,7 @@
           = link_to 'ログアウト', destroy_user_session_path, method: :delete, class:'mylist'
           %i.fas.fa-chevron-right
 
-
-  .cards__new
+  = form_tag(pay_cards_path, method: :post, id: 'charge-form',  name: "inputForm", class: "cards__new") do
     .cards__form
       .cards__container
         .container__head
@@ -92,10 +91,10 @@
             .input__number
               .number__titles
                 .number__title
-                  %p カード番号
+                  %label カード番号
                 .number__require
-                  %p 必須
-              %input{name: "card_id", placeholder: "半角英数のみ", type: "text"}
+                  %label 必須
+              = text_field_tag "number", "", class: "number", placeholder: "半角数字のみ" ,maxlength: "16", type: "text", id: "card_number"
               %ul.card__images
                 %li
                   = image_tag src=("https://www-mercari-jp.akamaized.net/assets/img/card/visa.svg?2482339763"), class: "card__image"
@@ -114,11 +113,12 @@
             .input__limit
               .limit__titles
                 .limit__title
-                  %p 有効期限
+                  %label 有効期限
                 .limit__require
-                  %p 必須
+                  %label 必須
               .card__limit
-                %select{name: "card_month"}>
+                %select#exp_month{name: "exp_month", type: "text"}
+                  %option{value: ""} --
                   %option{value: "01"} 01
                   %option{value: "02"} 02
                   %option{value: "03"} 03
@@ -131,30 +131,32 @@
                   %option{value: "10"} 10
                   %option{value: "11"} 11
                   %option{value: "12"} 12
-                %span 月
-                %select{name: "card_year"}>
-                  %option{value: "20"} 20
-                  %option{value: "21"} 21
-                  %option{value: "22"} 22
-                  %option{value: "23"} 23
-                  %option{value: "24"} 24
-                  %option{value: "25"} 25
-                  %option{value: "26"} 26
-                  %option{value: "27"} 27
-                  %option{value: "28"} 28
-                  %option{value: "29"} 29
-                  %option{value: "30"} 30
+                %span 月/
+                %select#exp_year{name: "exp_year", type: "text"}
+                  %option{value: ""} --
+                  %option{value: "2020"} 20
+                  %option{value: "2021"} 21
+                  %option{value: "2022"} 22
+                  %option{value: "2023"} 23
+                  %option{value: "2024"} 24
+                  %option{value: "2025"} 25
+                  %option{value: "2026"} 26
+                  %option{value: "2027"} 27
+                  %option{value: "2028"} 28
+                  %option{value: "2029"} 29
+                  %option{value: "2030"} 30
                 %span 年
             .input__code
               .code__titles
                 .code__title
-                  %p セキュリティーコード
+                  %label セキュリティーコード
                 .code__require
-                  %p 必須
-              %input{name: "card_id", placeholder: "カード背面4桁もしくは3桁の番号", type: "text"}
+                  %label 必須
+              = text_field_tag "cvc", "", class: "cvc", placeholder: "カード背面4桁もしくは3桁の番号", maxlength: "4", id: "cvc"
+
             .question
               %span ?
-              %p カード背面の番号とは?
+              %label カード背面の番号とは?
             .regestration__btn
-              .btn
-                %p 登録する
+              #card_token
+              = submit_tag "追加する", id: "token_submit"

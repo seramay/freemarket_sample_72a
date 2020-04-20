@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  
+  get 'purchases/index'
+  get 'purchases/done'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
+
   devise_scope :user do
     get 'addresses', to: 'users/registrations#new_address'
     post 'addresses', to: 'users/registrations#create_address'
@@ -20,8 +22,13 @@ Rails.application.routes.draw do
   end
   
   resources :mypages, only: [:show, :destroy]
-  resources :cards, only: [:new, :create]
   
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root "homes#top"
+
+  resources :cards, only: [:new, :show, :create, :destroy] do
+    collection do
+      post 'pay', to: 'cards#pay'
+    end
+  end
 
 end
