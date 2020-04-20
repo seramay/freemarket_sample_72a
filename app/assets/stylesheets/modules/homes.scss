@@ -100,6 +100,13 @@ li {
         font-size: 18px;
         padding-bottom: 40px;
       }
+      .content__btn {
+        display: flex;
+        .a__btn {
+          width: 210px;
+          height: 70px;
+        }
+      }
     }
   }
   &__introduction {
@@ -190,6 +197,11 @@ li {
       }
       .content__btn {
         padding-top: 20px;
+        display: flex;
+        .a__btn {
+          width: 210px;
+          height: 70px;
+        }
       }
     }
   }
@@ -267,7 +279,30 @@ li {
           margin: 10px;
           height: 300px;
           width: 250px;
-          background-color: #93E884;
+          background-color: $formWhite;
+          .list__image {
+            height: 200px;
+            width: 250px;
+          }
+          .list__data {
+            height: calc(100% - 200px);
+            width: 100%;
+            padding: 15px;
+            .item__name {
+              font-size: 15px;
+              text-align: left;
+            }
+            .item__prices {
+              font-size: 15px;
+              display: flex;
+              justify-content: space-between;
+              margin: 5px 0;
+            }
+            .item__tax {
+              font-size: 13px;
+              text-align: left;
+            }
+          }
         }
       }
     }
@@ -291,12 +326,18 @@ li {
     }
     .inner__icon {
       padding-top: 25px;
+      display: flex;
+      .a__btn {
+        width: 210px;
+        height: 70px;
+      }
     }
   }
 }
 
 .footer {
-  padding: 60px 0;
+  width: 100%;
+  padding: 60px 160px;
   background-color: #272727;
   color: white;
   text-align: center;
@@ -351,8 +392,5 @@ li {
     font-size: 18px;
     text-decoration: none;
   }
-  // .sellbtn__icon {
-    
-  // }
 }
 

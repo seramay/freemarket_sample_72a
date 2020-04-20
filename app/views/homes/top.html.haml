@@ -26,7 +26,6 @@
           .signin
             = link_to '新規会員登録', new_user_registration_path, data: {turbolinks: :false}
 
-
 .main
   .main__visual
     .visual__content
@@ -37,8 +36,12 @@
         %br
           フリマアプリです
       .content__btn
-        = image_tag src=("app-store.svg"),size:"260x70", class: "dlbtn"
-        = image_tag src=("google-play.svg"),size:"260x70", class: "dlbtn"
+        .a__btn
+          = link_to "#" do
+            = image_tag src=("app-store.svg"),size:"260x70", class: "dlbtn"
+        .g__btn
+          = link_to "#" do
+            = image_tag src=("google-play.svg"),size:"260x70", class: "dlbtn"
 
   .main__introduction
     %h2.introduction__subtitle
@@ -91,8 +94,12 @@
           %br
           ほしかったあの商品に出会えるかもしれません。
       .content__btn
-        = image_tag src=("app-store.svg"),size:"260x70", class: "dlbtn"
-        = image_tag src=("google-play.svg"),size:"260x70", class: "dlbtn"
+        .a__btn
+          = link_to "#" do
+            = image_tag src=("app-store.svg"),size:"260x70", class: "dlbtn"
+        .g__btn
+          = link_to "#" do
+            = image_tag src=("google-play.svg"),size:"260x70", class: "dlbtn"
 
   .main__features
     .features__title
@@ -130,6 +137,19 @@
         = link_to '新規投稿商品', '#'
       .productbox__lists
         .lists__list
+          = image_tag @item_image.image_url, class: "list__image"
+          .list__data
+            .item__name
+              = @item.name
+            .item__prices
+              .item__price
+                %span ¥
+                = @item.price
+              .item__like
+                %i.fas.fa-star
+                %span 0
+            .item__tax
+              (税込み)
         .lists__list
         .lists__list
 
@@ -151,8 +171,12 @@
     .inner__text
       今すぐ無料ダウンロード！
     .inner__icon
-      = image_tag src=("app-store.svg"),size:"260x70", class: "dlbtn"
-      = image_tag src=("google-play.svg"),size:"260x70", class: "dlbtn"
+      .a__btn
+        = link_to "#" do
+          = image_tag src=("app-store.svg"),size:"260x70", class: "dlbtn"
+      .g__btn
+        = link_to "#" do
+          = image_tag src=("google-play.svg"),size:"260x70", class: "dlbtn"
 
 
 .footer
@@ -199,3 +223,5 @@
     出品する
   .sellbtn__icon
     = link_to image_tag("icon_camera", size: "80x80"), new_item_path, class: "camera"
+
+
