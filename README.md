@@ -34,6 +34,7 @@
 |ship_area|string|null: false|
 |ship_day|string|null: false|
 |ship_price|string|null: false|
+|ship_method|string|null: false|
 |user_id|references|null: false, foreign_key: true|
 |category_id|references|null: false, foreign_key: true|
 |brand_id|references|null: false, foreign_key: true|
@@ -52,7 +53,7 @@
 |first_name_reading|string|null: false|
 |last_name_reading|string|null: false|
 |post_code|integer|null: false|
-|prefecture_code|integer|null: false|
+|prefecture_id|integer|null: false|
 |address_city|string|null: false|
 |address_street|string|null: false|
 |address_building|string||

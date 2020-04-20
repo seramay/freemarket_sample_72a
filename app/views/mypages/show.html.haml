@@ -4,7 +4,7 @@
       .user-info__my-img
         = image_tag src=("member_photo_noimage_thumb.png"), class: "myicon"
       .user-info__my-name
-        akane
+        = current_user.nickname
       .user-info__user-info
         .user-info__evaluation
           評価  5
@@ -152,13 +152,13 @@
           = link_to 'いいね！一覧', '#', class:'mylist'
           %i.fas.fa-chevron-right
         .lists__list
-          = link_to '出品する', '', class:'mylist'
+          = link_to  '出品する', new_item_path, class:'mylist'
           %i.fas.fa-chevron-right
         .lists__list
           = link_to '下書き一覧', '#', class:'mylist'
           %i.fas.fa-chevron-right
         .lists__list
-          = link_to '出品した商品-出品中', '#', class:'mylist'
+          = link_to '出品した商品-出品中', item_path(@items), class:'mylist'
           %i.fas.fa-chevron-right
         .lists__list
           = link_to '出品した商品-取引中', '#', class:'mylist'
