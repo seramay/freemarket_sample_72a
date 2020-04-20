@@ -43,6 +43,15 @@ class ItemsController < ApplicationController
     end
   end
 
+  def create
+    @item = Item.new(items_params)
+    if @item.save(items_params)
+      redirect_to  items_path(@item.id), notice: 'アイテムを出品しました。'
+    else
+      redirect_to "/items/new", alert: 'アイテムの出品に失敗しました。'
+    end
+  end
+
   def show
     @user = @item.user
     @grandchild = Category.find(@item.category_id)  
@@ -53,13 +62,8 @@ class ItemsController < ApplicationController
     @parents = @parent.siblings
   end
 
-  def edit
-    
-  end
-
-
-
   private
+
 
   def set_item
     @item = Item.find(4)
