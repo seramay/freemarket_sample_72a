@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
   end
   
   def pay
-    @item = Item.find(1)
+    @item = Item.find(id: params[:id])
    #  1=params[:id]
   end
 
