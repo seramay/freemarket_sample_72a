@@ -12,11 +12,11 @@
     background: #f8f8f8;
     &__content{
       width: 700px;
-      height: 1800px;
+      height: 100%;
       margin: 0 auto;
       &__top{
         width: 700px;
-        height:1500px;
+        height: 100%;
         &__itemInfo{
           width: 700px;
           padding: 24px 40px 40px 40px;
@@ -28,13 +28,17 @@
             font-size: 28px;
           }
           &__image{
-            padding: 24px 40px 40px;
+            padding: 24px 40px 20px;
             .bx-wrapper {
               border: none;
             }
             &__ul{
               margin: 0 8%;
               align-items: center;
+              .item__image {
+                width: 100%;
+                height: 100%;
+              }
               &__li{
                 display: flex;
                 justify-content: center;
@@ -59,23 +63,7 @@
               }
             }
           }
-          &__purchase{
-            text-align: center;
-            background-color: #3CCACE;
-            margin-bottom: 30px;
-            height: 60px;
-            &__link{
-              text-decoration: none;
-              line-height: 60px;
-              color: white;
-              font-size: 25px;
-              font-weight: bold;
-              display:block;
-              width:100%;
-            }
-          }
           &__price{
-            margin: 24px 0 24px;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -90,6 +78,43 @@
                 font-size: 16px;
                 font-weight: normal;
               }
+            }
+          }
+          &__description{
+            width: 100%;
+            height: 100%;
+          &__purchase{
+            .main__show__content__top__itemInfo__purchase__a {
+              margin: 15px 0 20px;
+              background-color: #3CCACE;
+              color: #fff;
+              border: 1px solid #3CCACE;
+              width: 100%;
+              font-size: 18px;
+              line-height: 48px;
+              letter-spacing: 10px;
+              font-weight: bold;
+              cursor: pointer;
+              box-sizing: border-box;
+              display: inline-block;
+              text-decoration: none;
+              text-align: center;
+            }
+            .main__show__content__top__itemInfo__purchase__b {
+              margin: 15px 0 20px;
+              background-color: #52656B;
+              color: #fff;
+              border: 1px solid #52656B;
+              width: 100%;
+              font-size: 18px;
+              line-height: 48px;
+              letter-spacing: 10px;
+              font-weight: bold;
+              cursor: pointer;
+              box-sizing: border-box;
+              display: inline-block;
+              text-decoration: none;
+              text-align: center;
             }
           }
           &__detail{
@@ -127,9 +152,9 @@
                     padding: 15px 15px;
                     border: 1px solid #dedede;
                     font-size: 14px;
+                    color: black;
                     &__link{
                       text-decoration: none;
-                      color: #3CCACE;
                     }
                     &__link:hover {
                       text-decoration: underline;
@@ -207,6 +232,17 @@
               font-weight: bold;
             }
           }
+          &__pay{
+            height: 50px;
+            background-color: #ea352d;
+            text-align: center;
+            &__link{
+              line-height: 50px;
+              color: #fff;
+              font-size: 20px;
+              font-weight: bold;
+            }
+          }
         }
         &__commentArea{
           padding: 24px;
@@ -260,3 +296,29 @@
       }
     }
   }
+  .items-box_photo__sold{
+    width: 0;
+    height: 0;
+    border-top: 100px solid #ea352d ;
+    border-right: 100px solid transparent;
+    border-bottom: 100px solid transparent;
+    border-left: 100px solid #ea352d ;
+    z-index:100;
+    position: relative;
+    top:-480px;
+    left: -80px;
+    margin-bottom: -180px;
+    &__inner{
+      transform: rotate(-45deg);
+      font-size: 28px;
+      margin:-50px 0px 0px -75px;
+      color: #fff;
+      letter-spacing: 4px;
+      font-weight: 600;
+    }
+  }
+  a {
+    text-decoration: none;
+    color: black;
+  }
+}
