@@ -191,19 +191,19 @@ ticket_tops.children.create([{name: "男性アイドル"},{name: "女性アイ�
 ticket_jacket.children.create([{name: "東京公演"},{name: "大阪公演"}])
 ticket_pants.children.create([{name: "グループ"},{name: "ソロ"}])
 
-Brand.create!([{
-  name:'登録なし'
-  name:'coach'
-  name:'GUCCI'
-  name:'CHANEL'
-  name:'HERMES'
-  name:'LOUIS VUITTON'
-  name:'BVLGARI'
-  name:'Cartier'
-  name:'4℃'
-  name:'BERBERRY'
-  name:'TIFFANY & Co.'
-}])
+# Brand.create!([{
+#   name:'登録なし'
+#   name:'coach'
+#   name:'GUCCI'
+#   name:'CHANEL'
+#   name:'HERMES'
+#   name:'LOUIS VUITTON'
+#   name:'BVLGARI'
+#   name:'Cartier'
+#   name:'4℃'
+#   name:'BERBERRY'
+#   name:'TIFFANY & Co.'
+# }])
 
 # Item.create!([{
 #   name: '1',
