@@ -205,31 +205,31 @@ ticket_pants.children.create([{name: "グループ"},{name: "ソロ"}])
 #   name:'TIFFANY & Co.'
 # }])
 
-# Item.create!([{
-#   name: '1',
-#   description: 'スマホ',
-#   condition: '新品',
-#   ship_price: '無料',
-#   ship_area: '愛知県',
-#   ship_day: '2日以内',
-#   price: 130000,
-#   size: 'M',
-#   brand_id: 1,
-#   user_id: 1,
-#   category_id: 257
-# }])
-# Item.create!(
-#   [
-#     {
-#       name: '2',
-#       description: 'スマホ',
-#       condition: '新品',
-#       ship_price: '無料',
-#       ship_area: '愛知県',
-#       ship_day: '2日以内',
-#       price: 130000,
-#       size: 'M',
-#       brand_id: 1,
-#       user_id: 7,
-#       category_id: 257
-#     }])
+Item.create!([{
+  name: '1',
+  description: 'スマホ',
+  condition: '新品',
+  ship_price: '無料',
+  ship_area: '愛知県',
+  ship_day: '2日以内',
+  price: 130000,
+  size: 'M',
+  brand_id: 1,
+  user_id: 1,
+  category_id: 257
+}])
+Item.create!(
+  [
+    {
+      name: '2',
+      description: 'スマホ',
+      condition: '新品',
+      ship_price: '無料',
+      ship_area: '愛知県',
+      ship_day: '2日以内',
+      price: 130000,
+      size: 'M',
+      brand_id: 1,
+      user_id: 1,
+      category_id: 257
+    }])
