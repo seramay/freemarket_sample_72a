@@ -11,8 +11,6 @@ Rails.application.routes.draw do
     post 'addresses', to: 'users/registrations#create_address'
   end
   
-  root "homes#top"
-  
   resources :items do
     collection do
       get 'pay'
