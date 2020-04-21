@@ -1,6 +1,5 @@
 class HomesController < ApplicationController
   def top
-    @item = Item.find(1)
-    @item_image = ItemImage.find(@item.id)
+    @item = Item.order("created_at DESC").limit(3)
   end
 end

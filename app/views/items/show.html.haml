@@ -34,12 +34,19 @@
           .main__show__content__top__itemInfo__name
             = @item.name
           .main__show__content__top__itemInfo__image
-            %ul.main__show__content__top__itemInfo__image__ul
-              = image_tag @item_image.image_url, class: "item__image"
-              %li.main__show__content__top__itemInfo__image__ul
-              = image_tag 'https://tab-log.com/wp-content/uploads/2018/12/macbookpro1-1000.jpg',alt: '商品の画像です',  height: '87px', width: '140px', class: 'main__show__content__top__itemInfo__image__ul_li'
-              = image_tag 'https://www.pakutaso.com/shared/img/thumb/macbook1697_TP_V.jpg', alt: '商品の画像です', height: '87px', width: '140px', class: ''
-              = image_tag 'https://www.pakutaso.com/shared/img/thumb/macbook1683_TP_V.jpg', alt: '商品の画像です', height: '87px', width: '140px', class: ''
+            .main__show__content__top__itemInfo__image__main
+              = image_tag @item.item_images[0].image_url.url, class: "main__image"
+              %ul.main__show__content__top__itemInfo__image__main__ul
+                %li.main__show__content__top__itemInfo__image__main__ul__li
+                  = image_tag @item.item_images[0].image_url.url, alt: '商品の画像です', class: 'sub__image'
+                %li.main__show__content__top__itemInfo__image__main__ul__li
+                  = image_tag @item.item_images[1].image_url.url, alt: '商品の画像です', class: 'sub__image'
+                %li.main__show__content__top__itemInfo__image__main__ul__li
+                  = image_tag @item.item_images[2].image_url.url, alt: '商品の画像です', class: 'sub__image'
+                %li.main__show__content__top__itemInfo__image__main__ul__li
+                  = image_tag @item.item_images[3].image_url.url, alt: '商品の画像です', class: 'sub__image'
+                %li.main__show__content__top__itemInfo__image__main__ul__li
+                  = image_tag @item.item_images[4].image_url.url, alt: '商品の画像です', class: 'sub__image'
             .custom-thumb
           .main__show__content__top__itemInfo__price
             %span.main__show__content__top__itemInfo__price__span
@@ -56,7 +63,6 @@
                 送料込み
           .main__show__content__top__itemInfo__description
             = @item.description
-          .main__show__content__top__itemInfo__detail
           .main__show__content__top__itemInfo__table
             %table.main__show__content__top__itemInfo__table__table
               %tbody.main__show__content__top__itemInfo__table__table__tbody
@@ -100,7 +106,7 @@
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     発送元の地域
                   %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
-                    = @item.ship_area
+                    = @ship_area.name
                 %tr.main__show__content__top__itemInfo__table__table__tbody__tr
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     発送日の目安
@@ -122,13 +128,15 @@
                 = link_to "この商品を編集する", edit_item_path(@item), class: "main__show__content__top__itemUser__edit__link"
               .main__show__content__top__itemUser__destroy
                 = link_to "この商品を削除する", item_path(@item), method: :delete, class: "main__show__content__top__itemUser__destroy__link"
-          - else
+          - elsif @item.status != 1
             .main__show__content__top__itemUser
               .main__show__content__top__itemUser__pay
                 = link_to "この商品を購入する", pay_items_path, class: "main__show__content__top__itemUser__pay__link"
-            - if @item.status == 1
-              .main__show__content__top__itemUser__pay__link
-                %h3 売り切れました
+          - else
+            .main__show__content__top__itemUser
+              .main__show__content__top__itemUser__pay
+                .main__show__content__top__itemUser__pay__link
+                  売り切れました
           .main__show__content__top__commentArea
             %form{action: "#", class: "main__show__content__top__commentArea__form"}
               %textarea.main__show__content__top__commentArea__form__textarea
