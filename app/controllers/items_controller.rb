@@ -65,10 +65,6 @@ class ItemsController < ApplicationController
   def update
   end
 
-  def destroy
-  end
-
-
   private
 
   def set_item
@@ -84,10 +80,9 @@ class ItemsController < ApplicationController
   def item_params
     # brand_idセレクトボックスがユーザーによって選択されなかった場合、「その他」もしくは「登録なし」のようなレコードを代入
     if params.require(:item)[:brand_id] == ""
-      params.require(:item)[:brand_id] = "4"
+      params.require(:item)[:brand_id] = "1"
     end
     params.require(:item).permit(:name, :price, :description, :category_id, :status, :condition, :size, :ship_price, :ship_area, :ship_day, :ship_method, :brand_id, item_images_attributes: [:image_url, :id, :_destroy]).merge(user_id: current_user.id)
   end
 
 end
-
