@@ -39,7 +39,7 @@
               %span 必須
             .listing-select-wrapper
               .listing-select-wrapper__box
-                = f.select :category_id, @category_parent_array, {}, {class: 'listing-select-wrapper__box--select', id: 'parent_category'} 
+                = f.select :category_id, @category_parent_array, {prompt: '---'}, {class: 'listing-select-wrapper__box--select', id: 'parent_category'} 
                 %i.fas.fa-angle-down.listing-select-wrapper__box--arrow-down
           .content-formbox
             %h3

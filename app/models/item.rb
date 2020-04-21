@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   belongs_to :category
   belongs_to :brand
   has_many :orders
-  has_many :item_images
+  has_many :item_images, dependent: :destroy
   accepts_nested_attributes_for :item_images, allow_destroy: true
 
   validates_associated :item_images
@@ -16,8 +16,12 @@ class Item < ApplicationRecord
   validates :ship_area,        presence: true
   validates :ship_day,         presence: true
   validates :ship_price,       presence: true
-  validates :ship_method,      presence: true
   validates :category_id,      presence: true
+  validates :ship_method,      presence: true
+  # カテゴリ実装後まで仮置き
+  # validates :category_id_1,    presence: true
+  # validates :category_id_2,    presence: true
+  # validates :category_id_3,    presence: true
 
 
   enum size: { "S": "S", "M": "M", "L": "L", "LL": "LL", "XL": "XL"}, _prefix: true

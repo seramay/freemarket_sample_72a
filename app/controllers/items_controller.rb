@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
   end
   
   def pay
-    @item = Item.find(1)
+    @item = Item.find(id: params[:id])
    #  1=params[:id]
   end
 
@@ -60,31 +60,28 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    
   end
 
+  def update
+  end
 
   private
 
   def set_item
     @item = Item.find(params[:id])
+    @ship_area = Prefecture.find(@item.ship_area)
+    # @item_image = ItemImage.find(@item.id)
   end
 
   def set_category
-    #セレクトボックスの初期値設定
-    @category_parent_array = ["---"]
-    #データベースから、親カテゴリーのみ抽出し、配列化
-    Category.where(ancestry: nil).each do |parent|
-      @category_parent_array << parent.name
-    end
+    @category_parent_array = Category.where(ancestry: nil).pluck(:name)
   end
     
   def item_params
     # brand_idセレクトボックスがユーザーによって選択されなかった場合、「その他」もしくは「登録なし」のようなレコードを代入
     if params.require(:item)[:brand_id] == ""
-      params.require(:item)[:brand_id] = "4"
+      params.require(:item)[:brand_id] = "1"
     end
     params.require(:item).permit(:name, :price, :description, :category_id, :status, :condition, :size, :ship_price, :ship_area, :ship_day, :ship_method, :brand_id, item_images_attributes: [:image_url, :id, :_destroy]).merge(user_id: current_user.id)
   end
 end
-
