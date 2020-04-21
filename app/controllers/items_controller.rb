@@ -49,15 +49,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  def create
-    @item = Item.new(items_params)
-    if @item.save(items_params)
-      redirect_to  items_path(@item.id), notice: 'アイテムを出品しました。'
-    else
-      redirect_to "/items/new", alert: 'アイテムの出品に失敗しました。'
-    end
-  end
-
   def show
     @user = @item.user
     @grandchild = Category.find(@item.category_id)  
@@ -76,7 +67,6 @@ class ItemsController < ApplicationController
 
   private
 
-
   def set_item
     @item = Item.find(params[:id])
     @item_image = @item.item_images
@@ -89,10 +79,9 @@ class ItemsController < ApplicationController
   def item_params
     # brand_idセレクトボックスがユーザーによって選択されなかった場合、「その他」もしくは「登録なし」のようなレコードを代入
     if params.require(:item)[:brand_id] == ""
-      params.require(:item)[:brand_id] = "4"
+      params.require(:item)[:brand_id] = "1"
     end
     params.require(:item).permit(:name, :price, :description, :category_id, :status, :condition, :size, :ship_price, :ship_area, :ship_day, :ship_method, :brand_id, item_images_attributes: [:image_url, :id, :_destroy]).merge(user_id: current_user.id)
   end
 
 end
-
