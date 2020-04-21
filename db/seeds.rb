@@ -7,8 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-require 'faker'
-Faker::Config.locale = :ja
+# require 'faker'
+# Faker::Config.locale = :ja
 #   name = Faker::Name.unique.name
 #   email = Faker::Internet.email
 #   password = "hogehoge"
