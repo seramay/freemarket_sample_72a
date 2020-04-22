@@ -70,7 +70,7 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
     @ship_area = Prefecture.find(@item.ship_area)
-    # @item_image = ItemImage.find(@item.id)
+    @item_images = @item.item_images
   end
 
   def set_category
