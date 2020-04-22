@@ -5,7 +5,7 @@ class CardsController < ApplicationController
 
   def new
     card = Card.where(user_id: current_user.id)
-    redirect_to action: "show" if card.exists?
+    redirect_to card_path(current_user.id) if card.exists?
   end
 
   def pay #payjpとCardのデータベース作成を実施
@@ -20,14 +20,14 @@ class CardsController < ApplicationController
       ) #念の為metadataにuser_idを入れましたがなくてもOK
       @card = Card.new(user_id: current_user.id, customer_id: customer.id, card_id: customer.default_card)
       if @card.save
-        redirect_to action: "show"
+        redirect_to card_path(current_user.id)
       else
         redirect_to action: "pay"
       end
     end
   end
 
-  def destroy #PayjpとCardデータベースを削除
+  def delete #PayjpとCardデータベースを削除
     if @card.present?
       Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
       customer = Payjp::Customer.retrieve(@card.customer_id)
