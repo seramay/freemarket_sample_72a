@@ -329,7 +329,9 @@ li {
     .inner__icon {
       padding-top: 25px;
       display: flex;
-        .a__btn {
+      justify-content: center;
+      align-items: center;
+        .dlbtn {
           width: 210px;
           height: 70px;
         }
