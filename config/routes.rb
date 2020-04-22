@@ -11,11 +11,13 @@ Rails.application.routes.draw do
     post 'addresses', to: 'users/registrations#create_address'
   end
   
-  root "homes#top"
-  
   resources :items do
     collection do
       get 'pay'
+      get 'get_category_children', defaults: { format: 'json' }
+      get 'get_category_grandchildren', defaults: { format: 'json' }
+    end
+    member do
       get 'get_category_children', defaults: { format: 'json' }
       get 'get_category_grandchildren', defaults: { format: 'json' }
     end
@@ -25,9 +27,11 @@ Rails.application.routes.draw do
   
   root "homes#top"
 
-  resources :cards, only: [:new, :show, :create, :destroy] do
+  resources :cards, only: [:new, :show, :create] do
     collection do
+      post 'show', to: 'cards#show'
       post 'pay', to: 'cards#pay'
+      post 'delete', to: 'cards#delete'
     end
   end
 

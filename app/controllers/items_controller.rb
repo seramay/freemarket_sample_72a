@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :destroy, :edit, :update]
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_category, only: [:new, :create]
+  before_action :set_category, only: [:new, :create, :edit]
 
   def index
     @item = Item.all
@@ -13,8 +13,19 @@ class ItemsController < ApplicationController
 
 
   def new
-    @item = Item.new
-    @item.item_images.build
+    if current_user.blank?
+      redirect_to root_path
+      flash[:alert] = 'ログインを行なってください。'
+      else  
+      @item = Item.new
+      @item.item_images.new
+      @category = Category.roots
+      @category_parent_array = ["指定なし"]
+      Category.where(ancestry: nil).each do |parent|
+        @category_parent_array << parent.name
+      end
+      @item.item_images.build
+    end
   end
   
   def get_category_children 
@@ -62,9 +73,29 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    if current_user.blank?
+      redirect_to root_path
+      flash[:alert] = 'ログインを行なってください。'
+    else
+      if @item.user.id == current_user.id
+      @category = Category.roots
+      Category.where(ancestry: nil).each do |parent|
+        @category_parent_array << parent.name
+      end
+      else
+        redirect_to root_path , notice: '自身の出品ではないため編集できません'
+      end
+    end
   end
 
+
+
   def update
+    if @item.update(item_params)
+      redirect_to item_path(@item.id), notice: "商品情報を編集しました"
+    else
+      redirect_to edit_item_path, notice: "編集できません。入力必須項目を確認してください"
+    end
   end
 
   private

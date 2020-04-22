@@ -140,6 +140,10 @@
           .lists__list
             = link_to item_path(item.id) do
               -# = image_tag item.item_images[0].image_url.url, class: "list__image"
+            - if item.status == 1
+              .product__sold
+                .product__sold__inner
+                  SOLD
             .list__data
               .item__name
                 = item.name
@@ -164,6 +168,7 @@
         .lists__list
         .lists__list
         .lists__list
+
 
 .banner
   .banner__inner
@@ -223,4 +228,4 @@
   %span.sellbtn__text
     出品する
   .sellbtn__icon
-    = link_to image_tag("icon_camera", size: "80x80"), new_item_path, class: "camera", data: {"turbolinks" => false}
+    = link_to image_tag("icon_camera.png", size: "80x80"), new_item_path, class: "camera", data: {"turbolinks" => false}
