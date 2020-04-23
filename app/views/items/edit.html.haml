@@ -19,7 +19,7 @@
                 = f.fields_for :item_images do |image|
                   .preview--zone.js-file_group{id: "preview--zone#{image.index}", data:{ index: image.index}}
                     .img{id: "img#{image.index}"}
-                      = image_tag "#{@item_images[image.index].image_url.url}", data:{ index: image.index}
+                      = image_tag @item_images[image.index].image_url.url, data:{ index: image.index}
                     .buttons
                       = image.label :image_url, class: "buttons--edit" do
                         編集
