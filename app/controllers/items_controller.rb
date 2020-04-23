@@ -13,19 +13,8 @@ class ItemsController < ApplicationController
   end
 
   def new
-    if current_user.blank?
-      redirect_to root_path
-      flash[:alert] = 'ログインを行なってください。'
-      else  
-      @item = Item.new
-      @item.item_images.new
-      @category = Category.roots
-      @category_parent_array = ["指定なし"]
-      Category.where(ancestry: nil).each do |parent|
-        @category_parent_array << parent.name
-      end
-      @item.item_images.build
-    end
+    @item = Item.new
+    @item.item_images.build
   end
   
   def get_category_children 
