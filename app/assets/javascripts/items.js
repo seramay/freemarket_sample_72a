@@ -25,7 +25,6 @@ $(document).on('turbolinks:load', ()=> {
   let fileIndex = [11,12,13,14,15,16,17,18,19,20];
   var lastIndex = $('.js-file_group:last').data('index');
   fileIndex.splice(0, lastIndex);
-  $('.hidden-destroy').hide();
 
   // 商品出品画像の投稿
   $('.container-box__area').on('click', function(){
@@ -52,7 +51,7 @@ $(document).on('turbolinks:load', ()=> {
     img.setAttribute('src', blobUrl);
   });
 
-  //商品情報更新時のプレビュー編集 'change'に変更
+  //商品情報更新時のプレビュー編集
   $('#preview').on('change', '.js-edit-file', function(e) {
     const updateIndex = $(this).parent().parent().parent().data('index');
     var file = e.target.files[0];
