@@ -14,7 +14,7 @@
         %p 最大5枚までアップロードできます
         .images-drop
           .images-drop__container
-            = f.fields_for :item_images, @item.item_images.build do |i|
+            = f.fields_for :item_images, @item do |i|
               .container-box
                 .container-box__preview#preview
                 .container-box__area
