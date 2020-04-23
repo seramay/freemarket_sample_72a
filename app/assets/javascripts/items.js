@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load', ()=> {
+$(function() {
   // 画像用のinputを生成する関数
   var buildFileField = (index)=> {
     var html = `<div data-index="${index}" class="preview--zone js-file_group" id="preview--zone${index}">
