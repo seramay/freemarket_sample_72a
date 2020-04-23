@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :destroy, :edit, :update]
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_category, only: [:new, :create]
+  before_action :set_category, only: [:new, :create, :edit, :update]
 
   def index
     @item = Item.all
@@ -60,9 +60,20 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @grandchild = Category.find(@item.category_id)  
+    @grandchildren = @grandchild.siblings
+    @child = @grandchild.parent
+    @parent = @child.parent
+    @children = @child.siblings
+    @parents = @parent.siblings
   end
 
   def update
+    if@item.update(item_params)
+      redirect_to item_path(@item.id)
+    else
+      render "edit"
+    end
   end
 
   private
@@ -70,7 +81,7 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
     @ship_area = Prefecture.find(@item.ship_area)
-    # @item_image = ItemImage.find(@item.id)
+    @item_images = @item.item_images
   end
 
   def set_category
@@ -82,6 +93,6 @@ class ItemsController < ApplicationController
     if params.require(:item)[:brand_id] == ""
       params.require(:item)[:brand_id] = "1"
     end
-    params.require(:item).permit(:name, :price, :description, :category_id, :status, :condition, :size, :ship_price, :ship_area, :ship_day, :ship_method, :brand_id, item_images_attributes: [:image_url, :id, :_destroy]).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :price, :description, :category_id, :status, :condition, :size, :ship_price, :ship_area, :ship_day, :ship_method, :brand_id, item_images_attributes: [:image_url, :_destroy, :id]).merge(user_id: current_user.id)
   end
 end
