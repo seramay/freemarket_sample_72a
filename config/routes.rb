@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  get 'purchases/index'
-  get 'purchases/done'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
@@ -11,15 +9,20 @@ Rails.application.routes.draw do
     post 'addresses', to: 'users/registrations#create_address'
   end
   
+  resources :purchases do
+    member do
+      get 'index', to: 'purchases#index'
+      post 'done', to: 'purchases#done'
+    end
+  end
+
   resources :items do
     collection do
-      get 'pay'
       get 'get_category_children', defaults: { format: 'json' }
       get 'get_category_grandchildren', defaults: { format: 'json' }
     end
     member do
-      get 'get_category_children', defaults: { format: 'json' }
-      get 'get_category_grandchildren', defaults: { format: 'json' }
+      get 'pay'
     end
   end
   
