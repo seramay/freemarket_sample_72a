@@ -33,21 +33,12 @@
         .main__show__content__top__itemInfo
           .main__show__content__top__itemInfo__name
             = @item.name
-          .main__show__content__top__itemInfo__image
-            .main__show__content__top__itemInfo__image__main
-              = image_tag @item.item_images[0].image_url.url, class: "main__image"
-              %ul.main__show__content__top__itemInfo__image__main__ul
-                %li.main__show__content__top__itemInfo__image__main__ul__li
-                  = image_tag @item.item_images[0].image_url.url, alt: '商品の画像です', class: 'sub__image'
-                %li.main__show__content__top__itemInfo__image__main__ul__li
-                  = image_tag @item.item_images[1].image_url.url, alt: '商品の画像です', class: 'sub__image'
-                %li.main__show__content__top__itemInfo__image__main__ul__li
-                  = image_tag @item.item_images[2].image_url.url, alt: '商品の画像です', class: 'sub__image'
-                %li.main__show__content__top__itemInfo__image__main__ul__li
-                  = image_tag @item.item_images[3].image_url.url, alt: '商品の画像です', class: 'sub__image'
-                %li.main__show__content__top__itemInfo__image__main__ul__li
-                  = image_tag @item.item_images[4].image_url.url, alt: '商品の画像です', class: 'sub__image'
-            .custom-thumb
+            .main__show__content__top__itemInfo__image
+              .main__show__content__top__itemInfo__image__main
+                = image_tag @item.item_images[0].image_url.url, class: "main__image"
+              .main__show__content__top__itemInfo__image__sub
+                -# - @item_images.each do |item_image|
+                  = image_tag item_image.image_url.url, alt: "商品の画像です", class: "sub__image"
           .main__show__content__top__itemInfo__price
             %span.main__show__content__top__itemInfo__price__span
               %span ¥
@@ -90,8 +81,7 @@
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     商品のサイズ
                   %td.main__show__content__top__itemInfo__table__table__tbody__tr__td
-                    - unless @item.size.nil?
-                      = @item.size
+                    = @item.size
                 %tr.main__show__content__top__itemInfo__table__table__tbody__tr
                   %th.main__show__content__top__itemInfo__table__table__tbody__tr__th
                     商品の状態

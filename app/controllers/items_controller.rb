@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :destroy, :edit, :update]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_category, only: [:new, :create, :edit, :update]
+  before_action :set_category_object, only: [:show, :editm :update]
 
   def index
     @item = Item.all
@@ -11,10 +12,20 @@ class ItemsController < ApplicationController
     @present = Category.where(ancestry: nil)
   end
 
-
   def new
-    @item = Item.new
-    @item.item_images.build
+    if current_user.blank?
+      redirect_to root_path
+      flash[:alert] = 'ログインを行なってください。'
+      else  
+      @item = Item.new
+      @item.item_images.new
+      @category = Category.roots
+      @category_parent_array = ["指定なし"]
+      Category.where(ancestry: nil).each do |parent|
+        @category_parent_array << parent.name
+      end
+      @item.item_images.build
+    end
   end
   
   def get_category_children 
@@ -51,28 +62,16 @@ class ItemsController < ApplicationController
 
   def show
     @user = @item.user
-    @grandchild = Category.find(@item.category_id)  
-    @grandchildren = @grandchild.siblings
-    @child = @grandchild.parent
-    @parent = @child.parent
-    @children = @child.siblings
-    @parents = @parent.siblings
   end
 
   def edit
-    @grandchild = Category.find(@item.category_id)  
-    @grandchildren = @grandchild.siblings
-    @child = @grandchild.parent
-    @parent = @child.parent
-    @children = @child.siblings
-    @parents = @parent.siblings
   end
 
   def update
     if@item.update(item_params)
-      redirect_to item_path(@item.id)
+      redirect_to item_path(@item.id), notice: "商品情報を編集しました"
     else
-      render "edit"
+      render "edit", notice: "編集できません。入力必須項目を確認してください"
     end
   end
 
@@ -86,6 +85,15 @@ class ItemsController < ApplicationController
 
   def set_category
     @category_parent_array = Category.where(ancestry: nil).pluck(:name)
+  end
+    
+  def set_category_object
+    @grandchild = Category.find(@item.category_id)  
+    @grandchildren = @grandchild.siblings
+    @child = @grandchild.parent
+    @parent = @child.parent
+    @children = @child.siblings
+    @parents = @parent.siblings
   end
     
   def item_params

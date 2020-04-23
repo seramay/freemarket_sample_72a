@@ -17,15 +17,21 @@ Rails.application.routes.draw do
       get 'get_category_children', defaults: { format: 'json' }
       get 'get_category_grandchildren', defaults: { format: 'json' }
     end
+    member do
+      get 'get_category_children', defaults: { format: 'json' }
+      get 'get_category_grandchildren', defaults: { format: 'json' }
+    end
   end
   
   resources :mypages, only: [:show, :destroy]
   
   root "homes#top"
 
-  resources :cards, only: [:new, :show, :create, :destroy] do
+  resources :cards, only: [:new, :show, :create] do
     collection do
+      post 'show', to: 'cards#show'
       post 'pay', to: 'cards#pay'
+      post 'delete', to: 'cards#delete'
     end
   end
 
