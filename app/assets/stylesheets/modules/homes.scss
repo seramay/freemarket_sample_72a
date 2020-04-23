@@ -41,6 +41,7 @@ li {
             .btn {
               background-color: #3CCACE;
               .searchicon {
+                padding-top: 3px;
                 height: 33px;
                 width: 30px;
                 background-color: #3CCACE;
@@ -328,7 +329,9 @@ li {
     .inner__icon {
       padding-top: 25px;
       display: flex;
-        .a__btn {
+      justify-content: center;
+      align-items: center;
+        .dlbtn {
           width: 210px;
           height: 70px;
         }

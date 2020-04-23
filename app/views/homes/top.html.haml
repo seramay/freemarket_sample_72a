@@ -139,7 +139,7 @@
         - @item.each do |item|
           .lists__list
             = link_to item_path(item.id) do
-              = image_tag item.item_images[0].image_url.url, class:"list__image"
+              = image_tag item.item_images[0].image_url.url, data: {turbolinks: :false}, class: "list__image"
             - if item.status == 1
               .product__sold
                 .product__sold__inner
@@ -244,4 +244,5 @@
     出品する
   .sellbtn__icon
     = link_to new_item_path do
-      = image_tag("icon_camera.png", size: "80x80"), class: "camera", data: {"turbolinks" => false}
+      = image_tag src=("icon_camera"), size: "80x80", class: "camera", data: {"turbolinks" => false}
+

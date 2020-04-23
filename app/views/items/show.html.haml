@@ -37,7 +37,7 @@
               .main__show__content__top__itemInfo__image__main
                 = image_tag @item.item_images[0].image_url.url, class: "main__image"
               .main__show__content__top__itemInfo__image__sub
-                -# - @item_images.each do |item_image|
+                - @item_images.each do |item_image|
                   = image_tag item_image.image_url.url, alt: "商品の画像です", class: "sub__image"
           .main__show__content__top__itemInfo__price
             %span.main__show__content__top__itemInfo__price__span
