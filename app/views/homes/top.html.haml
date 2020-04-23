@@ -139,7 +139,11 @@
         - @item.each do |item|
           .lists__list
             = link_to item_path(item.id) do
-              -# = image_tag item.item_images[0].image_url.url, class: "list__image"
+              = image_tag item.item_images[0].image_url.url, data: {turbolinks: :false}, class: "list__image"
+            - if item.status == 1
+              .product__sold
+                .product__sold__inner
+                  SOLD
             .list__data
               .item__name
                 = item.name
@@ -148,12 +152,10 @@
                   %span ¥
                   = item.price
                 .item__like
-                  %i.fas.fa-star
+                  %i.far.fa-star
                   %span 0
               .item__tax
                 (税込み)
-          
-
   .main__pickup
     .pickup__title
       ピックアップブランド
@@ -161,9 +163,26 @@
       .productbox__producttitle
         = link_to 'アーカイバ', '#'
       .productbox__lists
-        .lists__list
-        .lists__list
-        .lists__list
+        - @item.each do |item|
+          .lists__list
+            = link_to item_path(item.id) do
+              = image_tag item.item_images[0].image_url.url, class:"list__image"
+            - if item.status == 1
+              .product__sold
+                .product__sold__inner
+                  SOLD
+            .list__data
+              .item__name
+                = item.name
+              .item__prices
+                .item__price
+                  %span ¥
+                  = item.price
+                .item__like
+                  %i.far.fa-star
+                  %span 0
+              .item__tax
+                (税込み)
 
 .banner
   .banner__inner
@@ -223,6 +242,5 @@
   %span.sellbtn__text
     出品する
   .sellbtn__icon
-    = link_to image_tag("icon_camera.png", size: "80x80"), new_item_path, class: "camera", data: {"turbolinks" => false}
-
-
+    = link_to new_item_path do
+      = image_tag src=("icon_camera.png"), size: "80x80", class: "camera", data: {"turbolinks" => false}
