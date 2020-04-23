@@ -35,7 +35,7 @@
             = @item.name
             .main__show__content__top__itemInfo__image
               .main__show__content__top__itemInfo__image__main
-                = image_tag @item.item_images[0].image_url.url, class: "main__image"
+                = image_tag src=(@item.item_images[0].image_url.url), size: "150x150", class: "main__image"
               .main__show__content__top__itemInfo__image__sub
                 - @item_images.each do |item_image|
                   = image_tag item_image.image_url.url, alt: "商品の画像です", class: "sub__image"

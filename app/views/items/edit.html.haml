@@ -2,7 +2,7 @@
   .item-new-body__header
     .header__logo
       =link_to root_path do
-        = image_tag src=("logo.png"), size: "180x50"
+        = image_tag "logo.png", size: "180x50"
   .item-new-body__main
     %h2 商品の情報の入力
     = form_with scope: :item, model: @item, class: :new_product, local: true, multipart: true do |f|
@@ -19,7 +19,7 @@
                 = f.fields_for :item_images do |image|
                   .preview--zone.js-file_group{id: "preview--zone#{image.index}", data:{ index: image.index}}
                     .img{id: "img#{image.index}"}
-                      = image_tag src=("#{@item_images[image.index].image_url.url}"), data:{ index: image.index}
+                      = image_tag "#{@item_images[image.index].image_url.url}", data:{ index: image.index}
                     .buttons
                       = image.label :image_url, class: "buttons--edit" do
                         編集
@@ -163,5 +163,5 @@
       = link_to "特定商取引に関する表記", "https://www.mercari.com/jp/tokutei/"
     .footer__logo
       = link_to root_path do
-        = image_tag src=("logo-white.png"), size: "180x50"
+        = image_tag "logo-white.png", size: "180x50"
     %p ©︎ 2020 FURIMA
