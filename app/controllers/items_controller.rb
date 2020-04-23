@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :destroy, :edit, :update]
+  before_action :set_item, only: [:show, :destroy, :edit, :update, :pay]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_category, only: [:new, :create, :edit, :update]
   before_action :set_category_object, only: [:show, :edit, :update]
@@ -36,8 +36,6 @@ class ItemsController < ApplicationController
   end
   
   def pay
-    @item = Item.find(id: params[:id])
-   #  1=params[:id]
   end
 
   def destroy
