@@ -15,7 +15,6 @@ class MypagesController < ApplicationController
   end
 
   def update
-    @user.update(update_params)
     unless @user.update(update_params)
       redirect_to edit_user_path(@user.id), notice: "変更できません。ニックネームとパスワードは必須項目です"
     end
@@ -26,7 +25,6 @@ class MypagesController < ApplicationController
   end
 
   def update_detail
-    @user.update(update_detail_params)
     unless @user.update(update_detail_params)
       redirect_to user_edit_detail_path(@user.id), notice: "変更できません。メールアドレスとパスワードは必須項目です"
     end
