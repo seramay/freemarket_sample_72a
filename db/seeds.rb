@@ -29,7 +29,7 @@
 #   )
  
 
-choice = Category.create(name: "選択してください  最後まで選択必須！")
+# choice = Category.create(name: "選択してください  最後まで選択必須！")
 # レディース
 lady = Category.create(name: "レディース")
 lady_tops = lady.children.create(name: "トップス")
@@ -205,31 +205,31 @@ ticket_pants.children.create([{name: "グループ"},{name: "ソロ"}])
 #   name:'TIFFANY & Co.'
 # }])
 
-Item.create!([{
-  name: '1',
-  description: 'スマホ',
-  condition: '新品',
-  ship_price: '無料',
-  ship_area: '愛知県',
-  ship_day: '2日以内',
-  price: 130000,
-  size: 'M',
-  brand_id: 1,
-  user_id: 1,
-  category_id: 257
-}])
-Item.create!(
-  [
-    {
-      name: '2',
-      description: 'スマホ',
-      condition: '新品',
-      ship_price: '無料',
-      ship_area: '愛知県',
-      ship_day: '2日以内',
-      price: 130000,
-      size: 'M',
-      brand_id: 1,
-      user_id: 1,
-      category_id: 257
-    }])
+# Item.create!([{
+#   name: '1',
+#   description: 'スマホ',
+#   condition: '新品',
+#   ship_price: '無料',
+#   ship_area: '愛知県',
+#   ship_day: '2日以内',
+#   price: 130000,
+#   size: 'M',
+#   brand_id: 1,
+#   user_id: 1,
+#   category_id: 257
+# }])
+# Item.create!(
+#   [
+#     {
+#       name: '2',
+#       description: 'スマホ',
+#       condition: '新品',
+#       ship_price: '無料',
+#       ship_area: '愛知県',
+#       ship_day: '2日以内',
+#       price: 130000,
+#       size: 'M',
+#       brand_id: 1,
+#       user_id: 1,
+#       category_id: 257
+#     }])
