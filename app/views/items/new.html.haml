@@ -2,7 +2,7 @@
   .item-new-body__header
     .header__logo
       =link_to root_path do
-        = image_tag src=("logo.png"), size: "180x50"
+        = image_tag "logo.png", size: "180x50"
   .item-new-body__main
     %h2 商品の情報の入力
     = form_with scope: :item, model: @item, class: :new_product, local: true, multipart: true do |f|
