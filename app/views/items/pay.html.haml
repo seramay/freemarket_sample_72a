@@ -21,7 +21,7 @@
               .price-table__pay
                 = @item.price
             .info__buy-btn
-              = link_to '購入する', '/purchases/index'
+              = link_to '購入する', purchase_path(@item)
       .content__buy-user-info
         .buy-user-info__title
           配送先
