@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :destroy, :edit, :update]
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_category, only: [:new, :create, :edit]
+  before_action :set_category, only: [:new, :create, :edit, :update]
+  before_action :set_category_object, only: [:show, :editm :update]
 
   def index
     @item = Item.all
@@ -10,7 +11,6 @@ class ItemsController < ApplicationController
     @categories = Category.all
     @present = Category.where(ancestry: nil)
   end
-
 
   def new
     if current_user.blank?
@@ -60,10 +60,34 @@ class ItemsController < ApplicationController
     end
   end
 
-  
-
   def show
     @user = @item.user
+  end
+
+  def edit
+  end
+
+  def update
+    if@item.update(item_params)
+      redirect_to item_path(@item.id), notice: "商品情報を編集しました"
+    else
+      render "edit", notice: "編集できません。入力必須項目を確認してください"
+    end
+  end
+
+  private
+
+  def set_item
+    @item = Item.find(params[:id])
+    @ship_area = Prefecture.find(@item.ship_area)
+    @item_images = @item.item_images
+  end
+
+  def set_category
+    @category_parent_array = Category.where(ancestry: nil).pluck(:name)
+  end
+    
+  def set_category_object
     @grandchild = Category.find(@item.category_id)  
     @grandchildren = @grandchild.siblings
     @child = @grandchild.parent
@@ -71,52 +95,12 @@ class ItemsController < ApplicationController
     @children = @child.siblings
     @parents = @parent.siblings
   end
-
-  def edit
-    if current_user.blank?
-      redirect_to root_path
-      flash[:alert] = 'ログインを行なってください。'
-    else
-      if @item.user.id == current_user.id
-      @category = Category.roots
-      Category.where(ancestry: nil).each do |parent|
-        @category_parent_array << parent.name
-      end
-      else
-        redirect_to root_path , notice: '自身の出品ではないため編集できません'
-      end
-    end
-  end
-
-
-
-  def update
-    if @item.update(item_params)
-      redirect_to item_path(@item.id), notice: "商品情報を編集しました"
-    else
-      redirect_to edit_item_path, notice: "編集できません。入力必須項目を確認してください"
-    end
-  end
-
-  private
-
-
-  def set_item
-    @item = Item.find(params[:id])
-    @item_image = @item.item_images
-  end
-
-  def set_category
-    @category_parent_array = Category.where(ancestry: nil).pluck(:name)
-  end
     
   def item_params
     # brand_idセレクトボックスがユーザーによって選択されなかった場合、「その他」もしくは「登録なし」のようなレコードを代入
     if params.require(:item)[:brand_id] == ""
       params.require(:item)[:brand_id] = "1"
     end
-    params.require(:item).permit(:name, :price, :description, :category_id, :status, :condition, :size, :ship_price, :ship_area, :ship_day, :ship_method, :brand_id, item_images_attributes: [:image_url, :id, :_destroy]).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :price, :description, :category_id, :status, :condition, :size, :ship_price, :ship_area, :ship_day, :ship_method, :brand_id, item_images_attributes: [:image_url, :_destroy, :id]).merge(user_id: current_user.id)
   end
-
 end
-
