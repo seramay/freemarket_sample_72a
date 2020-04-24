@@ -3,6 +3,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
+  layout "sign_up_application"
 
   # GET /resource/sign_up
   def new
@@ -12,34 +13,34 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     @user = User.new(sign_up_params)
+    # バリデーションに引っかからないか確かめる
     unless @user.valid?
-      # バリデーションに引っかからないか確かめる
       flash.now[:alert] = @user.errors.full_messages
       render :new and return
     end
     # ユーザー登録で入力した情報をsessionで保持
-    session["devise.regist_data"] = {user: @user.attributes}
     # sessionにハッシュオブジェクトの形で情報を保持させるために、attributesメソッドを用いてデータを整形
-    session["devise.regist_data"][:user]["password"] = params[:user][:password]
+    session["devise.regist_data"] = {user: @user.attributes}
     # attributesメソッドでデータ整形をした際にパスワードの情報は含まれていないため、パスワードを再度sessionに代入
-    @deliver_address = @user.build_deliver_address
+    session["devise.regist_data"][:user]["password"] = params[:user][:password]
     # 生成したインスタンス@userに紐づくAddressモデルのインスタンスを生成
+    @deliver_address = @user.build_deliver_address
     render :new_address
   end
 
   def create_address
     @user = User.new(session["devise.regist_data"]["user"])
     @deliver_address = DeliverAddress.new(address_params)
+    # バリデーションに引っかからないか確かめる
     unless @deliver_address.valid?
-      # バリデーションに引っかからないか確かめる
       flash.now[:alert] = @deliver_address.errors.full_messages
       render :new_address and return
     end
+    # バリデーションチェックが完了した情報と、Sessionで保持していた情報とあわせ、ユーザー情報として保存すること
     @user.build_deliver_address(@deliver_address.attributes)
     @user.save
-    # バリデーションチェックが完了した情報と、Sessionで保持していた情報とあわせ、ユーザー情報として保存すること
-    session["devise.regist_data"]["user"].clear
     # clearメソッドを用いて明示的にsessionを削除します。
+    session["devise.regist_data"]["user"].clear
     sign_in(:user, @user)
   end
 
