@@ -32,7 +32,7 @@ class PurchasesController < ApplicationController
   end
 
   def  done
-    @item = Item.find(id: params[:id])
+    @item = Item.find(params[:id])
     @item.update( status: 1)
    end
 
