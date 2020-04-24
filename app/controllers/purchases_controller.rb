@@ -32,9 +32,8 @@ class PurchasesController < ApplicationController
   end
 
   def  done
-    @item = Item.find(8)
+    @item = Item.find(id: params[:id])
     @item.update( status: 1)
-    # @item.update( status: current_order.id)
    end
 
    private
