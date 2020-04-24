@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :destroy, :edit, :update]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_category, only: [:new, :create]
+  layout "sub_application", only: :new
 
   def index
     @item = Item.all

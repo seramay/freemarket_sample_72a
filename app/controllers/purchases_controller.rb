@@ -1,5 +1,5 @@
 class PurchasesController < ApplicationController
-
+  layout "sub_application"
   require 'payjp'
 
   def index
