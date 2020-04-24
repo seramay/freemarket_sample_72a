@@ -1,3 +1,85 @@
+// 購入確認ページ
+.confirm-complete {
+  height: 100vh;
+  width: 100%;
+  background-color: #ddd;
+  padding-top: 15px;
+  .confirm-box {
+    height: 400px;
+    width: 500px;
+    background-color: #fff;
+    margin: 0 auto;
+    &__message {
+      height: 15%;
+      border-bottom: 1px solid #ddd;
+      .message_question {
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 15px;
+      }
+    }
+    &__image {
+      height: 30%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    &__name {
+      height: 10%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .name__confirm-name {
+        font-size: 18px;
+      }
+
+    }
+    &__price {
+      height: 20%;
+      .price__confirm-price {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+      }
+      .price__confirm-ship {
+        padding-left: 30px;
+        font-size: 14px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+    &__purchase {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .purchase__confirm-btn {
+        height: 50px;
+        width: 100%;
+        background-color:rgb(255, 4, 4);
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        button {
+          background: none;
+          border: none;
+          outline: none;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          appearance: none;
+          color: #fff;
+          cursor: pointer;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+// 購入完了ページ
 .purchase-completed {
   height: 100vh;
   width: 100%;
@@ -42,6 +124,14 @@
           text-align: center;
         }
       }
+      .notice__back {
+        font-size: 10px;
+        float: right;
+        padding: 10px 30px;
+        .back-btn {
+          color: #6D8BE8;
+        }
+      }
     }
     &__information {
       height: 40%;
@@ -54,7 +144,6 @@
         .left-box__image {
           height: 120px;
           width: 100px;
-          background-color: skyblue;
         }
       }
       .information__right-box {
@@ -62,7 +151,7 @@
         width: 250px;
         .right-box__name{
           height: 60%;
-          font-size: 20px;
+          font-size: 18px;
           padding-top: 10px;
         }
         .right-box__prices {
