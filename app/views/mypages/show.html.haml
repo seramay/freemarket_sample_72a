@@ -2,6 +2,7 @@
   .mypage-prduct__contents
     .contents__user-info
       .user-info__my-img
+        = image_tag src=("member_photo_noimage_thumb.png"),size:"50x50"
       .user-info__my-name
         = current_user.nickname
       .user-info__user-info
@@ -157,13 +158,7 @@
           = link_to '下書き一覧', '#', class:'mylist'
           %i.fas.fa-chevron-right
         .lists__list
-        - current_user.items.each do |item|
-          - if  item.item_images[0].present?
-            %ul
-              %li
-                = link_to image_tag( item.item_images[0].image_url.url, height: "150", width: "150", class: "mylist"), item_path(item.id)
-              %li
-                = link_to item.name, item_path(item.id), {class: "mylist"}
+          = link_to '出品した商品-出品中', '#', class:'mylist'
           %i.fas.fa-chevron-right
         .lists__list
           = link_to '出品した商品-取引中', '#', class:'mylist'
