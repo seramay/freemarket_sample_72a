@@ -192,7 +192,7 @@
 # ticket_pants.children.create([{name: "グループ"},{name: "ソロ"}])
 
 Brand.create!([{
-  name:'登録なし',
+  name:'登録なし'
   # name:'coach',
   # name:'GUCCI',
   # name:'CHANEL',
