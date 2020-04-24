@@ -7,11 +7,12 @@
         .buy-product__inner
           .inner__item
             .item__image
-              画像
+              = image_tag @item.item_images[0].image_url.url, size: "100x100"
             .item__name
               = @item.name
           .inner__info
             .info__price
+              ¥
               = @item.price
             .info__point
               ポイントはありません
@@ -19,26 +20,33 @@
               .price-table__payment
                 支払金額
               .price-table__pay
+                ¥
                 = @item.price
             .info__buy-btn
-              = link_to '購入する', purchase_path(@item)
+              = link_to '購入する', purchase_path(@item), class: "purchase-btn"
       .content__buy-user-info
         .buy-user-info__title
           配送先
         .buy-user-info__text
-          000-000
+          = @address.post_code
           %br
-          愛知県名古屋市中区栄3丁目13-20
+          -# = @address.prefecture_id
+          = @address.address_city
+          = @address.address_street
+          = @address.address_building
           %br
-          熊澤祐弥
+          = @address.first_name
+          = @address.last_name
         .buy-user-info__change
           = link_to '変更する', '#'
       .content__buy-user-info
         .buy-user-info__title
           支払方法 
         .buy-user-info__text
-          **** **** ****4242
+          = "**** **** **** " + @default_card_information.last4
           %br
-          12 / 20
+          - exp_month = @default_card_information.exp_month.to_s
+          - exp_year = @default_card_information.exp_year.to_s.slice(2,3)
+          = exp_month + " / " + exp_year
         .buy-user-info__change
           = link_to '変更する', '#'

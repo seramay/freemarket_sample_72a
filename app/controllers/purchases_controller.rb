@@ -1,6 +1,7 @@
 class PurchasesController < ApplicationController
 
   require 'payjp'
+  before_action :set_item, only: [:index, :done]
 
   def index
     card = Card.find_by(user_id: current_user.id)
@@ -36,4 +37,10 @@ class PurchasesController < ApplicationController
     # @item.update( status: current_order.id)
    end
 
+   private
+
+  def set_item
+    @item = Item.find(params[:id])
+    @item_images = @item.item_images
+  end
 end
