@@ -24,12 +24,9 @@
           .inner__item {
             display: flex;
             .item__image {
-              height: 80px;
-              width: 78px;
-              background-color: brown;
             }
             .item__name {
-              margin-left: 14px;
+              margin-left: 20px;
               text-align: left;
               font-weight: 600;
             }
@@ -70,7 +67,6 @@
             .info__buy-btn {
               margin: 15px 0 0;
               background-color: red;
-              color: #fff;
               border: 1px solid red;
               width: 100%;
               font-size: 14px;
@@ -79,6 +75,9 @@
               box-sizing: border-box;
               display: inline-block;
               text-decoration: none;
+              .purchase-btn {
+                color: #fff;
+              }
             }
           }
         }
@@ -106,4 +105,8 @@
       }
     }
   }
+}
+
+.hidden-destroy{
+  display: none;
 }

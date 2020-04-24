@@ -1,7 +1,10 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :destroy, :edit, :update]
+  before_action :set_item, only: [:show, :destroy, :edit, :update, :pay]
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_category, only: [:new, :create]
+  before_action :set_category, only: [:new, :create, :edit, :update]
+  before_action :set_category_object, only: [:show, :edit, :update]
+  before_action :set_card, only: [:pay]
+  before_action :set_deliver_address, only: [:pay]
   layout "sub_application", only: :new
 
   def index
@@ -11,7 +14,6 @@ class ItemsController < ApplicationController
     @categories = Category.all
     @present = Category.where(ancestry: nil)
   end
-
 
   def new
     @item = Item.new
@@ -37,8 +39,9 @@ class ItemsController < ApplicationController
   end
   
   def pay
-    @item = Item.find(id: params[:id])
-   #  1=params[:id]
+    Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
+    customer = Payjp::Customer.retrieve(@card.customer_id)
+    @default_card_information = customer.cards.retrieve(@card.card_id)
   end
 
   def destroy
@@ -52,18 +55,17 @@ class ItemsController < ApplicationController
 
   def show
     @user = @item.user
-    @grandchild = Category.find(@item.category_id)  
-    @grandchildren = @grandchild.siblings
-    @child = @grandchild.parent
-    @parent = @child.parent
-    @children = @child.siblings
-    @parents = @parent.siblings
   end
 
   def edit
   end
 
   def update
+    if@item.update(item_params)
+      redirect_to item_path(@item.id), notice: "商品情報を編集しました"
+    else
+      render "edit", notice: "編集できません。入力必須項目を確認してください"
+    end
   end
 
   private
@@ -78,11 +80,28 @@ class ItemsController < ApplicationController
     @category_parent_array = Category.where(ancestry: nil).pluck(:name)
   end
     
+  def set_category_object
+    @grandchild = Category.find(@item.category_id)  
+    @grandchildren = @grandchild.siblings
+    @child = @grandchild.parent
+    @parent = @child.parent
+    @children = @child.siblings
+    @parents = @parent.siblings
+  end
+    
   def item_params
     # brand_idセレクトボックスがユーザーによって選択されなかった場合、「その他」もしくは「登録なし」のようなレコードを代入
     if params.require(:item)[:brand_id] == ""
       params.require(:item)[:brand_id] = "1"
     end
-    params.require(:item).permit(:name, :price, :description, :category_id, :status, :condition, :size, :ship_price, :ship_area, :ship_day, :ship_method, :brand_id, item_images_attributes: [:image_url, :id, :_destroy]).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :price, :description, :category_id, :status, :condition, :size, :ship_price, :ship_area, :ship_day, :ship_method, :brand_id, item_images_attributes: [:image_url, :_destroy, :id]).merge(user_id: current_user.id)
+  end
+
+  def set_card
+    @card = Card.find_by(user_id: current_user.id)
+  end
+
+  def set_deliver_address
+    @address = DeliverAddress.find_by(user_id: current_user.id)
   end
 end

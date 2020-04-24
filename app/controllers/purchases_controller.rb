@@ -1,9 +1,10 @@
 class PurchasesController < ApplicationController
   layout "sub_application"
   require 'payjp'
+  before_action :set_item, only: [:index, :done]
 
   def index
-    card = Card.find_by(user_id: 1)
+    card = Card.find_by(user_id: current_user.id)
     # card = Card.where(user_id: current_user.id).first
     #Cardテーブルは前回記事で作成、テーブルからpayjpの顧客IDを検索
     if card.blank?
@@ -19,7 +20,7 @@ class PurchasesController < ApplicationController
   end
 
   def pay
-    card = Card.find_by(user_id: 1)
+    card = Card.find_by(user_id: current_user.id)
     # card = Card.where(user_id: current_user.id).first
     Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
     Payjp::Charge.create(
@@ -31,9 +32,15 @@ class PurchasesController < ApplicationController
   end
 
   def  done
-    @item = Item.find(1)
+    @item = Item.find(8)
     @item.update( status: 1)
     # @item.update( status: current_order.id)
    end
 
+   private
+
+  def set_item
+    @item = Item.find(params[:id])
+    @item_images = @item.item_images
+  end
 end
