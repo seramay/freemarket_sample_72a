@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   before_action :set_category_object, only: [:show, :edit, :update]
   before_action :set_card, only: [:pay]
   before_action :set_deliver_address, only: [:pay]
-  layout "sub_application", only: [:new, , :create, :pay, :edit, :update]
+  layout "sub_application", only: [:new, :create, :pay, :edit, :update]
 
   def index
     @item = Item.all
