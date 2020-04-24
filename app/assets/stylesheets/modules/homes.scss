@@ -25,8 +25,8 @@ li {
       .main__icon {
         padding-right: 40px;
         .topicon {
-          height: 40px;
-          width: 140px;
+          height: 45px;
+          width: 150px;
         }
       }
       .main__searchbox {
@@ -61,15 +61,27 @@ li {
         display: flex;
         .category {
           padding: 7px;
+          display: flex;
+          .category-icon {
+            padding-top: 3px;
+          }
         }
         .brand {
+          display: flex;
           padding: 7px;
+          .brand-icon {
+            padding-top: 3px;
+          }
         }
       }
       .nav__right {
         display: flex;
         .login {
+          display: flex;
           padding: 7px;
+          .noimage-icon {
+            padding-top: 3px;
+          }
         }
         .signin {
           padding: 7px;
@@ -211,7 +223,7 @@ li {
     height: 600px;
     padding: 60px 90px;
     .features__title {
-      font-size: 20px;
+      font-size: 28px;
       text-align: center;
       font-weight: bold;
       height: 100px;
