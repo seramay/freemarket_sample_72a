@@ -3,6 +3,9 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_category, only: [:new, :create, :edit, :update]
   before_action :set_category_object, only: [:show, :edit, :update]
+  before_action :set_card, only: [:pay]
+  before_action :set_deliver_address, only: [:pay]
+  layout "sub_application", only: [:new, :pay]
 
   def index
     @item = Item.all
@@ -36,6 +39,9 @@ class ItemsController < ApplicationController
   end
   
   def pay
+    Payjp.api_key = ENV["PAYJP_PRIVATE_KEY"]
+    customer = Payjp::Customer.retrieve(@card.customer_id)
+    @default_card_information = customer.cards.retrieve(@card.card_id)
   end
 
   def destroy
@@ -89,5 +95,13 @@ class ItemsController < ApplicationController
       params.require(:item)[:brand_id] = "1"
     end
     params.require(:item).permit(:name, :price, :description, :category_id, :status, :condition, :size, :ship_price, :ship_area, :ship_day, :ship_method, :brand_id, item_images_attributes: [:image_url, :_destroy, :id]).merge(user_id: current_user.id)
+  end
+
+  def set_card
+    @card = Card.find_by(user_id: current_user.id)
+  end
+
+  def set_deliver_address
+    @address = DeliverAddress.find_by(user_id: current_user.id)
   end
 end
