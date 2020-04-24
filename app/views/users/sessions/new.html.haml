@@ -1,44 +1,27 @@
-.login__new
-  .login__title
-    = link_to root_path do
-      = image_tag src=("logo.png"), class: "login__image"
-  .login__form
-    .login__container
-      .container__head
-        .head__title
-          %p アカウントをお持ち出ない方はこちら
-        .head__btn
-          = link_to "新規会員登録", new_user_registration_path
-      .container__body
-        %ul.body__lists
-          %li.btn__list__fa
-            = link_to "#" do
-              %i.fab.fa-facebook-square
-              Facebookでログイン
-          %li.btn__list__go
-            = link_to "#" do
-              = image_tag src=("https://img.icons8.com/color/48/000000/google-logo.png"), class: "google"
-              Googleでログイン
-        .body__form
-          = form_with model: @user, url: user_session_path, method: :post, local: true do |f|
-            .field
-              = f.email_field :email, autofocus: true, placeholder: "メールアドレス"
-            .field
-              = f.password_field :password, placeholder: "パスワード"
-            .btn
-              = f.submit "ログイン", class: "btn__login"
-            .word
-              %p パスワードお忘れの方
-  .new__footer
-    %ul.footer__lists
-      %li
-        プライバシーポリシー
-      %li
-        フリマ利用規約
-      %li
-        特定商取引に関する表記
-    .footer__icon
-      = link_to root_path do
-        = image_tag src=("logo-white.png"), class: "icon__image"
-    .footer__text
-      %p ©︎ 2020 Furima
+.login__form
+  .login__container
+    .container__head
+      .head__title
+        %p アカウントをお持ち出ない方はこちら
+      .head__btn
+        = link_to "新規会員登録", new_user_registration_path
+    .container__body
+      %ul.body__lists
+        %li.btn__list__fa
+          = link_to "#" do
+            %i.fab.fa-facebook-square
+            Facebookでログイン
+        %li.btn__list__go
+          = link_to "#" do
+            = image_tag src=("https://img.icons8.com/color/48/000000/google-logo.png"), class: "google"
+            Googleでログイン
+      .body__form
+        = form_with model: @user, url: user_session_path, method: :post, local: true do |f|
+          .field
+            = f.email_field :email, autofocus: true, placeholder: "メールアドレス"
+          .field
+            = f.password_field :password, placeholder: "パスワード"
+          .btn
+            = f.submit "ログイン", class: "btn__login"
+          .word
+            %p パスワードお忘れの方

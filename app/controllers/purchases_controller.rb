@@ -1,5 +1,5 @@
 class PurchasesController < ApplicationController
-
+  layout "sub_application"
   require 'payjp'
   before_action :set_item, only: [:index, :done]
 

@@ -1,0 +1,31 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title FreemarketSample72a
+    %script{src: "https://js.pay.jp/", type: "text/javascript"}
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
+  %body
+  .login__new
+    .login__title
+      = link_to root_path do
+        = image_tag src=("logo.png"), class: "login__image"
+    = yield
+    .new__footer
+      %ul.footer__lists
+        %li
+          プライバシーポリシー
+        %li
+          フリマ利用規約
+        %li
+          特定商取引に関する表記
+      .footer__icon
+        = link_to root_path do
+          = image_tag src=("logo-white.png"), class: "icon__image"
+      .footer__text
+        %p ©︎ 2020 Furima
+  
+
