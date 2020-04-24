@@ -192,16 +192,16 @@
 # ticket_pants.children.create([{name: "グループ"},{name: "ソロ"}])
 
 Brand.create!([{
-  name:'登録なし'
-  name:'coach'
-  name:'GUCCI'
-  name:'CHANEL'
-  name:'HERMES'
-  name:'LOUIS VUITTON'
-  name:'BVLGARI'
-  name:'Cartier'
-  name:'4℃'
-  name:'BERBERRY'
+  name:'登録なし',
+  name:'coach',
+  name:'GUCCI',
+  name:'CHANEL',
+  name:'HERMES',
+  name:'LOUIS VUITTON',
+  name:'BVLGARI',
+  name:'Cartier',
+  name:'4℃',
+  name:'BERBERRY',
   name:'TIFFANY & Co.'
 }])
 
